@@ -7,6 +7,9 @@ namespace Crew
 {
     public class CrewController : MonoBehaviour
     {
+        [Tooltip("[Debug]If true the crew member can be directly moved by mouse click")]
+        public bool autoAttachToWorldClicker;
+
         private NavMeshAgent    navMeshAgent;
         private Animator        animator;
 
@@ -20,6 +23,12 @@ namespace Crew
             speedHash = Animator.StringToHash("Speed");
 
             navMeshAgent.updateRotation = false;
+
+            if (autoAttachToWorldClicker)
+            {
+                GameObject gameManager = GameObject.Find("GameManager");
+                gameManager.GetComponent<WorldClickDestinationSetter>().AddOnClickedCallback(SetDestination);
+            }
         }
 
         void Update()
