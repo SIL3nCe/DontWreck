@@ -31,7 +31,10 @@ namespace Crew
         {
             if (navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon)
             {
-                transform.rotation = Quaternion.LookRotation(navMeshAgent.velocity.normalized);
+                Vector3 lookPosition = navMeshAgent.velocity;
+                lookPosition.y = 0.0f;
+
+                transform.rotation = Quaternion.LookRotation(lookPosition.normalized);
             }
         }
 
