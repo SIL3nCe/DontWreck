@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class UnitSelector : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class UnitSelector : MonoBehaviour
 	[Header("Other")]
 	[Tooltip("The image that is used to display the selection rect")]
 	public Image m_selectionRectImage;
+
+	public GameObject[] units;
 
 	//
 	// Private
@@ -37,21 +40,38 @@ public class UnitSelector : MonoBehaviour
     void Update()
     {
 		//
+		// Simple select
+		if (Input.GetMouseButtonUp(0) && !m_isSelecting)
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hitInfo;
+			if (Physics.Raycast(ray, out hitInfo))
+			{
+				Debug.LogError("Raycasted : " + hitInfo.collider.transform.name);
+			}
+		}
+
+		//
 		// Check if the mouse is pressed
 		if (Input.GetMouseButton(0))
 		{
 			//
-			// We store the mouse position if it is the first frame we are selecting
-			if (!m_isSelecting)
+			// We check if the mouse is moving
+			if (Mouse.current.delta.x.ReadValue() != 0f && Mouse.current.delta.y.ReadValue() != 0f)
 			{
 				//
-				// Store the mouse position
-				m_mouseStartPosition = Input.mousePosition;
-			}
+				// We store the mouse position if it is the first frame we are selecting
+				if (!m_isSelecting)
+				{
+					//
+					// Store the mouse position
+					m_mouseStartPosition = Input.mousePosition;
+				}
 
-			//
-			// We are selecting
-			m_isSelecting = true;
+				//
+				// We are selecting
+				m_isSelecting = true;
+			}
 		}
 		else
 		{
@@ -92,6 +112,29 @@ public class UnitSelector : MonoBehaviour
 			//
 			// Set the size of the rect
 			m_selectionRectImage.rectTransform.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
+
+			//
+			//
+			//
+			Vector3 startViewportPosition = Camera.main.ScreenToViewportPoint(m_mouseStartPosition);
+			Vector3 endViewportPosition = Camera.main.ScreenToViewportPoint(currentMousePosition);
+
+			Vector3 min = Vector3.Min(startViewportPosition, endViewportPosition);
+			Vector3 max = Vector3.Max(startViewportPosition, endViewportPosition);
+			min.z = Camera.main.nearClipPlane;
+			max.z = Camera.main.farClipPlane;
+
+			Bounds bounds = new Bounds();
+			bounds.SetMinMax(min, max);
+
+			foreach (var item in units)
+			{
+				if (bounds.Contains(Camera.main.WorldToViewportPoint(item.transform.position)))
+				{
+					Debug.LogWarning("GO " + item.transform.name + " is selected");
+				}
+			}
+
 		}
 	}
 
