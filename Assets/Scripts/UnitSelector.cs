@@ -16,56 +16,82 @@ public class UnitSelector : MonoBehaviour
 	[Tooltip("The tag of the units (only the game objects with this tag will be selectable)")]
 	string m_unitTag;   //< The tag that will be checked for gameobjects that are selectable
 
+	[Header("Other")]
+	[Tooltip("The image that is used to display the selection rect")]
 	public Image m_selectionRectImage;
 
 	//
 	// Private
 	//
-	private bool m_isSelecting;
-	private Vector2 m_mouseStartPosition;
-	private float m_currentWidth;
-	private float m_currentHeight;
-	private Vector2 m_currentMousePosition;
-
+	private bool m_isSelecting;		//< Indicates if the user is currently selecting 
+	private Vector2 m_mouseStartPosition;	//< The current selection start position for the current selection
 
     void Start()
     {
-        // ...
-    }
+		//
+		// We hide the selection rect image
+		m_selectionRectImage.enabled = false;
+	}
 
     // Update is called once per frame
     void Update()
     {
 		//
-		//
+		// Check if the mouse is pressed
 		if (Input.GetMouseButton(0))
 		{
 			//
-			//
+			// We store the mouse position if it is the first frame we are selecting
 			if (!m_isSelecting)
 			{
+				//
+				// Store the mouse position
 				m_mouseStartPosition = Input.mousePosition;
 			}
 
+			//
+			// We are selecting
 			m_isSelecting = true;
 		}
 		else
 		{
+			//
+			// We are selecting 
 			m_isSelecting = false;
+
+			//
+			// Hide the image
+			m_selectionRectImage.enabled = false;
 		}
 
+		//
+		// We are selecting
 		if (m_isSelecting)
 		{
-			m_currentMousePosition = Input.mousePosition;
+			//
+			// We display the selection rect
+			m_selectionRectImage.enabled = true;
 
+			//
+			// We retrieve the position of the mouse
+			Vector2 currentMousePosition = Input.mousePosition;
+
+			//
+			// We set the position of the selection rect to the current position of the mouse
 			m_selectionRectImage.transform.position = m_mouseStartPosition;
 
-			m_currentWidth = m_mouseStartPosition.x - m_currentMousePosition.x;
-			m_currentHeight = m_mouseStartPosition.y - m_currentMousePosition.y;
+			//
+			// Compute the height of the selection rect 
+			float width = m_mouseStartPosition.x - currentMousePosition.x;
+			float height = m_mouseStartPosition.y - currentMousePosition.y;
 
-			m_selectionRectImage.transform.localScale = new Vector3(m_currentWidth > 0f ? -1f : 1f, m_currentHeight > 0f ? 1f : -1f, 1f);
+			//
+			// We set the scale of the image rect
+			m_selectionRectImage.transform.localScale = new Vector3(width > 0f ? -1f : 1f, height > 0f ? 1f : -1f, 1f);
 
-			m_selectionRectImage.rectTransform.sizeDelta = new Vector2(Mathf.Abs(m_currentWidth), Mathf.Abs(m_currentHeight));
+			//
+			// Set the size of the rect
+			m_selectionRectImage.rectTransform.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
 		}
 	}
 

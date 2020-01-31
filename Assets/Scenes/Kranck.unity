@@ -558,7 +558,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 3
+  m_PixelsPerUnitMultiplier: 10
 --- !u!222 &1225994544
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 1585814944}
   - component: {fileID: 1585814943}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: UnitSelectionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
