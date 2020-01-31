@@ -18,11 +18,21 @@ namespace Crew
             animator = GetComponent<Animator>();
 
             speedHash = Animator.StringToHash("Speed");
+
+            navMeshAgent.updateRotation = false;
         }
 
         void Update()
         {
             animator.SetFloat(speedHash, navMeshAgent.velocity.normalized.magnitude);
+        }
+
+        void LateUpdate()
+        {
+            if (navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon)
+            {
+                transform.rotation = Quaternion.LookRotation(navMeshAgent.velocity.normalized);
+            }
         }
 
         public void SetDestination(Vector3 destination)
