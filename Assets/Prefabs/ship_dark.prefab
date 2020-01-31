@@ -1379,6 +1379,7 @@ GameObject:
   - component: {fileID: 885151070499046796}
   - component: {fileID: 885151070497752556}
   - component: {fileID: 885151070496622508}
+  - component: {fileID: 5857869772999256096}
   m_Layer: 0
   m_Name: ship_dark
   m_TagString: Untagged
@@ -1458,6 +1459,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &5857869772999256096
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885151070498626028}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: d4e11b9e630d2ed41bef099db564e5b4, type: 3}
 --- !u!1 &885151070498626030
 GameObject:
   m_ObjectHideFlags: 0
