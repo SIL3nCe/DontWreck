@@ -40,13 +40,20 @@ public class UnitSelector : MonoBehaviour
     void Update()
     {
 		//
-		// Simple select
+		// Simple select when mouse up (only if we are not multiple selecting
 		if (Input.GetMouseButtonUp(0) && !m_isSelecting)
 		{
+			//
+			// Create a ray from the position of the mouse and the camera
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+			//
+			// Raycast from the position of the mouse 
 			RaycastHit hitInfo;
 			if (Physics.Raycast(ray, out hitInfo))
 			{
+				//
+				// TODO: 
 				Debug.LogError("Raycasted : " + hitInfo.collider.transform.name);
 			}
 		}
@@ -114,24 +121,32 @@ public class UnitSelector : MonoBehaviour
 			m_selectionRectImage.rectTransform.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
 
 			//
-			//
-			//
+			// Convert the mouse start and current position to viewport positions
 			Vector3 startViewportPosition = Camera.main.ScreenToViewportPoint(m_mouseStartPosition);
 			Vector3 endViewportPosition = Camera.main.ScreenToViewportPoint(currentMousePosition);
 
+			//
+			// Retrieve the min and maximum positions to create bounds
+			// REF : https://hyunkell.com/blog/rts-style-unit-selection-in-unity-5/
 			Vector3 min = Vector3.Min(startViewportPosition, endViewportPosition);
 			Vector3 max = Vector3.Max(startViewportPosition, endViewportPosition);
 			min.z = Camera.main.nearClipPlane;
 			max.z = Camera.main.farClipPlane;
 
+			//
+			//Create the bounds object
 			Bounds bounds = new Bounds();
 			bounds.SetMinMax(min, max);
 
+			//
+			//
 			foreach (var item in units)
 			{
+				//
+				//
 				if (bounds.Contains(Camera.main.WorldToViewportPoint(item.transform.position)))
 				{
-					Debug.LogWarning("GO " + item.transform.name + " is selected");
+					//
 				}
 			}
 
