@@ -162,7 +162,7 @@ public class UnitSelector : MonoBehaviour
 
 			//
 			// Iterate over the units
-			foreach (var item in UnitsManager.m_instance.GetUnits())
+			foreach (var item in GameManager.m_instance.m_unitManager.GetUnits())
 			{
 				//
 				// We check if the bound contains the current item 

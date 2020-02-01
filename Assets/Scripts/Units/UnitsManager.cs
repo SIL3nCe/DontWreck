@@ -13,17 +13,6 @@ public class UnitsManager : MonoBehaviour
 {
 	public List<Unit> m_units = new List<Unit>();
 
-	public static UnitsManager m_instance;
-
-	public void Awake()
-	{
-		if (m_instance != this && m_instance != null)
-		{
-			Destroy(gameObject);
-		}
-		m_instance = this;
-	}
-
 	// Start is called before the first frame update
 	void Start()
     {
