@@ -15,6 +15,12 @@ namespace Objects
         public int                  m_placementAngleMaxDeg;
         public float                m_characterRadius;
 
+        [Header("HP")]
+        public int                  m_hpMax;
+
+        [Tooltip("Begin HP")]
+        public int                  m_hp;
+
         private float               m_placementAngleMin;
         private float               m_placementAngleMax;
         private float               m_placementStep;
@@ -56,6 +62,19 @@ namespace Objects
         void Update()
         {
 			
+        }
+
+        public bool HasFreePlacementPoint()
+        {
+            foreach(GameObject unit in m_reservedPoints)
+            {
+                if (unit == null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public bool GetPlacementPoint(GameObject unit, out Vector3 placementPoint)
