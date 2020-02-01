@@ -89,6 +89,8 @@ public class Unit : MonoBehaviour
 
 	public void SetObjective(Vector3 destination, GameObject clickedObject)
 	{
+		//If an interactable target is already set
+		//we inform it that we let our placement position
 		if (m_interactableTarget != null)
 		{
 			m_interactableTarget.FreePlacement(this);
@@ -96,8 +98,11 @@ public class Unit : MonoBehaviour
 
 		m_interactableTarget = clickedObject.GetComponent<Objects.InteractableObject>();
 
+		//If the user clicked on an interactable object
+		//We attempt to reserve a placement point
 		if (m_interactableTarget != null)
 		{
+			//If we fail to reserve we stay at our current position
 			if (!m_interactableTarget.GetPlacementPoint(this, out destination))
 			{
 				destination = m_crewController.transform.position;

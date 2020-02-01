@@ -6,7 +6,11 @@ namespace Objects
 {
     public class InteractableObject : MonoBehaviour
     {
-        public CircleCollider2D     m_placementCircle;
+        [Header("Circle")]
+        public Vector3  m_circleCenterOffset;
+        public float    m_circleRadius;
+        
+        [Header("Placement")]
         public int                  m_placementAngleMinDeg;
         public int                  m_placementAngleMaxDeg;
         public float                m_characterRadius;
@@ -17,10 +21,6 @@ namespace Objects
         private int                 m_pointCount;
 
         private Unit[]              m_reservedPoints;
-
-		[Header("Circle")]
-		public Vector3 m_circleCenterOffset;
-		public float m_circleRadius;
 
         void Start()
         {
