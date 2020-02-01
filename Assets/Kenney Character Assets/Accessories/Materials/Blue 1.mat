@@ -8,7 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Blue 1
-  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: -6465566751694194690, guid: 3f250b0037d4499459fa0fa9540889a5,
+    type: 3}
   m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -88,6 +89,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_85778B4F: 1
+    - Vector1_AD9D8A9E: 1
+    - Vector1_BE56FBD4: 4
     - _BlendMode: 0
     - _BumpScale: 1
     - _CullMode: 2
@@ -131,6 +135,7 @@ Material:
     - _UvAnimScrollY: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_36F5751E: {r: 0.41051087, g: 0.5508687, b: 0.7075472, a: 0}
     - _Color: {r: 0.49803925, g: 0.7058823, b: 0.9882353, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}

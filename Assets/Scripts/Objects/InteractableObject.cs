@@ -51,7 +51,8 @@ namespace Objects
 			//
             m_pointCount = Mathf.CeilToInt((m_placementAngleMax - m_placementAngleMin) / m_placementStep);
             m_reservedPoints = new Unit[m_pointCount];
-        }
+  
+		}
 
         void Update()
         {
