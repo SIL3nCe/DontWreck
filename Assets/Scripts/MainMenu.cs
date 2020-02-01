@@ -14,6 +14,8 @@ public class MainMenu : MonoBehaviour
     public CinemachineVirtualCamera PlayCamera;
     public CinemachineVirtualCamera CreditsCamera;
 
+    public TransitionScene transitionScene;
+
     public GameObject CreditsMenu;
 
     // Start is called before the first frame update
@@ -48,9 +50,14 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("PLAY ACTION");
 
+        // Hide menu, blend cameras
         GetComponent<Canvas>().enabled = false;
         FirstCamera.gameObject.SetActive(false);
         PlayCamera.gameObject.SetActive(true);
+
+        // Lauch scene loading
+        transitionScene.LoadScene(5000);
+
     }
 
     // Credits action
