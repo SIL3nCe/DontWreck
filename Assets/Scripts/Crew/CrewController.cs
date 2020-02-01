@@ -7,24 +7,24 @@ namespace Crew
 {
     public class CrewController : MonoBehaviour
     {
-        [Tooltip("[Debug]If true the crew member can be directly moved by mouse click")]
-        public bool autoAttachToWorldClicker;
+        [Tooltip("[Debug] If true the crew member can be directly moved by mouse click")]
+        public bool m_autoAttachToWorldClicker;
 
-        private NavMeshAgent    navMeshAgent;
-        private Animator        animator;
+        private NavMeshAgent    m_navMeshAgent;
+        private Animator        m_animator;
 
-        private int speedHash;
+        private int m_speedHash;
 
         void Start()
         {
-            navMeshAgent = GetComponent<NavMeshAgent>();
-            animator = GetComponent<Animator>();
+            m_navMeshAgent = GetComponent<NavMeshAgent>();
+            m_animator = GetComponent<Animator>();
 
-            speedHash = Animator.StringToHash("Speed");
+            m_speedHash = Animator.StringToHash("Speed");
 
-            navMeshAgent.updateRotation = false;
+            m_navMeshAgent.updateRotation = false;
 
-            if (autoAttachToWorldClicker)
+            if (m_autoAttachToWorldClicker)
             {
                 GameObject gameManager = GameObject.Find("GameManager");
                 gameManager.GetComponent<WorldClickDestinationSetter>().AddOnClickedCallback(SetDestination);
@@ -33,14 +33,14 @@ namespace Crew
 
         void Update()
         {
-            animator.SetFloat(speedHash, navMeshAgent.velocity.normalized.magnitude);
+            m_animator.SetFloat(m_speedHash, m_navMeshAgent.velocity.normalized.magnitude);
         }
 
         void LateUpdate()
         {
-            if (navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon)
+            if (m_navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon)
             {
-                Vector3 lookPosition = navMeshAgent.velocity;
+                Vector3 lookPosition = m_navMeshAgent.velocity;
                 lookPosition.y = 0.0f;
 
                 transform.rotation = Quaternion.LookRotation(lookPosition.normalized);
@@ -49,7 +49,7 @@ namespace Crew
 
         public void SetDestination(Vector3 destination)
         {
-            navMeshAgent.destination = destination;
+            m_navMeshAgent.destination = destination;
         }
     }
 }

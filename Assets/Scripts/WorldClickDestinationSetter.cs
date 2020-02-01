@@ -7,7 +7,7 @@ public class WorldClickDestinationSetter : MonoBehaviour
 {
     public delegate void OnClicked(Vector3 clickPosition);
 
-    OnClicked onClickedCallbacks;
+    OnClicked m_onClickedCallbacks;
 
     void Start()
     {
@@ -23,23 +23,23 @@ public class WorldClickDestinationSetter : MonoBehaviour
 
             if (Physics.Raycast(mouseRay, out hitInfo))
             {
-                onClickedCallbacks?.Invoke(hitInfo.point);
+                m_onClickedCallbacks?.Invoke(hitInfo.point);
             }
         }
     }
 
     public void AddOnClickedCallback(OnClicked onClicked)
     {
-        onClickedCallbacks += onClicked;
+        m_onClickedCallbacks += onClicked;
     }
 
     public void RemoveOnClickedCallback(OnClicked onClicked)
     {
-        onClickedCallbacks -= onClicked;
+        m_onClickedCallbacks -= onClicked;
     }
 
     public void ClearOnClickedCallbacks()
     {
-        onClickedCallbacks = null;
+        m_onClickedCallbacks = null;
     }
 }
