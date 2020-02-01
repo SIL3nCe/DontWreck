@@ -12,6 +12,9 @@ public class CannonBallGenerator : MonoBehaviour
 
     void Start()
     {
+        if (CannonBallNumber == 0)
+            return;
+
         int remaining = CannonBallNumber;
         for (int i = 0; i < 50; ++i)
         {

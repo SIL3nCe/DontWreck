@@ -13,7 +13,8 @@ public class CannonExplosion : MonoBehaviour
     {
         Instantiate(ExplosionFX, vOrigin, Quaternion.identity);
 
-        GenerateFire(vOrigin, 5.0f, 2);
+        if (FireFX)
+            GenerateFire(vOrigin, 5.0f, 2);
     }
 
     public void GenerateFire(Vector3 vOrigin, float range, int fireNumber)
