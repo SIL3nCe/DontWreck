@@ -5,18 +5,14 @@ using UnityEngine;
 
 public class FallingObjectGenerator : MonoBehaviour
 {
-    public int CannonBallNumber;
     public float Radius;
 
-    public GameObject CannonBallPrefab;
+    public GameObject FallingObjectPrefab;
 
     void Start()
     {
-        if (CannonBallNumber == 0)
-            return;
-
-        int remaining = CannonBallNumber;
-        for (int i = 0; i < 50; ++i)
+        int remaining = 5;
+        for (int i = 0; i < remaining; ++i)
         {
             NavMeshHit originHit;
             NavMesh.SamplePosition(gameObject.transform.position, out originHit, 3.0f, NavMesh.AllAreas);
@@ -43,20 +39,14 @@ public class FallingObjectGenerator : MonoBehaviour
                         //    Debug.DrawLine(path.corners[j], path.corners[j + 1], Color.white, 500.0f);
                         //}
 
-                        GameObject cannonBall = Instantiate(CannonBallPrefab, new Vector3(finalPosition.x, finalPosition.y + 40.0f, finalPosition.z), Quaternion.identity);
-                        cannonBall.GetComponent<CannonBall>().vHitLocation = finalPosition;
+                        GameObject fallingObject = Instantiate(FallingObjectPrefab, new Vector3(finalPosition.x, finalPosition.y + 40.0f, finalPosition.z), Quaternion.identity);
+                        fallingObject.GetComponent<FallingObject>().vHitLocation = finalPosition;
 
-                        if (--remaining == 0)
-                            break;
+                       // if (--remaining == 0)
+                       //     break;
                     }
                 }
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class CannonExplosion : MonoBehaviour
+public class FallingExplosion : MonoBehaviour
 {
     public GameObject FireFX;
     public GameObject ExplosionFX;
