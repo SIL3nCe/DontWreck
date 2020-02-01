@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8917855809705379801}
+  - component: {fileID: 6536217411780924008}
+  - component: {fileID: 3380129429343067675}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -24,13 +26,44 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4472119864647150543}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15843964, y: 28.594334, z: -76.44221}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7529777119866135511}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6536217411780924008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472119864647150543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6cc968fa938c1e448f67a5c76907204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_placementCircle: {fileID: 0}
+  m_placementAngleMinDeg: 0
+  m_placementAngleMaxDeg: 180
+  m_characterRadius: 4
+  m_circleCenterOffset: {x: 0, y: -0.59, z: 0.82}
+  m_circleRadius: 3.34
+--- !u!65 &3380129429343067675
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4472119864647150543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.342353, y: 4.6181974, z: 6.217292}
+  m_Center: {x: -0.11525202, y: 1.8090987, z: -1.6366897}
 --- !u!1001 &7529777119866009941
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,20 +18,44 @@ namespace Objects
 
         private Unit[]              m_reservedPoints;
 
+		[Header("Circle")]
+		public Vector3 m_circleCenterOffset;
+		public float m_circleRadius;
+
         void Start()
         {
-            m_placementAngleMin = m_placementAngleMinDeg * Mathf.Deg2Rad;
+			//
+			//
+			m_placementAngleMinDeg -= (int)transform.rotation.eulerAngles.y;
+			m_placementAngleMinDeg = m_placementAngleMinDeg % 360;
+			m_placementAngleMaxDeg -= (int)transform.rotation.eulerAngles.y;
+			m_placementAngleMaxDeg = m_placementAngleMaxDeg % 360;
+
+			if (m_placementAngleMaxDeg < m_placementAngleMinDeg)
+			{
+				int tmp = m_placementAngleMaxDeg;
+				m_placementAngleMaxDeg = m_placementAngleMinDeg;
+				m_placementAngleMinDeg = tmp;
+			}
+
+			//
+			//
+			m_placementAngleMin = m_placementAngleMinDeg * Mathf.Deg2Rad;
             m_placementAngleMax = m_placementAngleMaxDeg * Mathf.Deg2Rad;
 
+			//
+			//
             FindStep();
 
+			//
+			//
             m_pointCount = Mathf.CeilToInt((m_placementAngleMax - m_placementAngleMin) / m_placementStep);
             m_reservedPoints = new Unit[m_pointCount];
         }
 
         void Update()
         {
-
+			
         }
 
         public bool GetPlacementPoint(Unit unit, out Vector3 placementPoint)
@@ -88,10 +112,17 @@ namespace Objects
         private Vector3 ComputePoint(float angle)
         {
             Vector3 res = new Vector3();
-            res.x = m_placementCircle.radius * Mathf.Cos(angle);
-            res.z = m_placementCircle.radius * Mathf.Sin(angle);
+            res.x = m_circleRadius * Mathf.Cos(angle);
+            res.z = m_circleRadius * Mathf.Sin(angle);
+
+			res += (transform.position + m_circleCenterOffset);
 
             return res;
         }
-    }
+
+		private void OnDrawGizmos()
+		{
+			Gizmos.DrawWireSphere(transform.position + m_circleCenterOffset, m_circleRadius);
+		}
+	}
 }
