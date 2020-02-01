@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CannonBall : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Vector3 vHitLocation;
+
     void Start()
     {
-        
+        //GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //prim2.transform.position = vHitLocation;
     }
-
-    // Update is called once per frame
     void Update()
     {
         
