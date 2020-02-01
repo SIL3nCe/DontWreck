@@ -888,6 +888,7 @@ GameObject:
   - component: {fileID: 423711179}
   - component: {fileID: 423711181}
   - component: {fileID: 423711180}
+  - component: {fileID: 423711182}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -957,6 +958,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423711178}
   m_CullTransparentMesh: 0
+--- !u!114 &423711182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423711178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2428dd250769c4944b38764d4a5b3007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 0}
+  CreditsCamera: {fileID: 0}
 --- !u!1 &507297831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &839966961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,7 +1335,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839966960}
-  m_LocalRotation: {x: 0.30856615, y: 0.033709195, z: -0.010942675, w: 0.95054245}
+  m_LocalRotation: {x: 0.30856612, y: 0.033709165, z: -0.010942665, w: 0.95054245}
   m_LocalPosition: {x: -520.8, y: 78.6, z: -52.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1987,6 +2002,7 @@ GameObject:
   - component: {fileID: 1371313951}
   - component: {fileID: 1371313950}
   - component: {fileID: 1371313949}
+  - component: {fileID: 1371313948}
   m_Layer: 5
   m_Name: CreditsMenu
   m_TagString: CreditMenu
@@ -1994,6 +2010,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &1371313948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371313947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2428dd250769c4944b38764d4a5b3007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 225709541}
+  CreditsCamera: {fileID: 2056644613}
 --- !u!114 &1371313949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2799,7 +2829,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2056644613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,7 +2872,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056644612}
-  m_LocalRotation: {x: 0.02095133, y: 0.5114553, z: -0.06692765, w: 0.8564434}
+  m_LocalRotation: {x: 0.020951347, y: 0.5114553, z: -0.06692766, w: 0.8564434}
   m_LocalPosition: {x: -628.3, y: 64.7, z: -47.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
