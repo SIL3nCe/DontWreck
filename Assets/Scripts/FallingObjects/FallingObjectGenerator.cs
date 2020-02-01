@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class CannonBallGenerator : MonoBehaviour
+public class FallingObjectGenerator : MonoBehaviour
 {
     public int CannonBallNumber;
     public float Radius;

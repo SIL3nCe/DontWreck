@@ -568,6 +568,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireFX: {fileID: 0}
   ExplosionFX: {fileID: 191186, guid: 26faf61ad70f9734a8fd7ba314cac7b7, type: 3}
+  ThingToSpawn: {fileID: 7273979611297458084, guid: ac5643791d1d66643bfecbeba6a29efb,
+    type: 3}
 --- !u!136 &7098629862470903736
 CapsuleCollider:
   m_ObjectHideFlags: 0
