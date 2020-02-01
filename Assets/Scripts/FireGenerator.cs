@@ -11,7 +11,7 @@ public class FireGenerator : MonoBehaviour
     public GameObject FireFX;
 
     // Start is called before the first frame update
-    void Start()
+    public void Generate()
     {
         int remaining = FireNumber;
         for (int i = 0; i < 50; ++i)
