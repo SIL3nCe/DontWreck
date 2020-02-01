@@ -93,7 +93,7 @@ public class Unit : MonoBehaviour
 		//we inform it that we let our placement position
 		if (m_interactableTarget != null)
 		{
-			m_interactableTarget.FreePlacement(this);
+			m_interactableTarget.FreePlacement(gameObject);
 		}
 
 		m_interactableTarget = clickedObject.GetComponent<Objects.InteractableObject>();
@@ -103,7 +103,7 @@ public class Unit : MonoBehaviour
 		if (m_interactableTarget != null)
 		{
 			//If we fail to reserve we stay at our current position
-			if (!m_interactableTarget.GetPlacementPoint(this, out destination))
+			if (!m_interactableTarget.GetPlacementPoint(gameObject, out destination))
 			{
 				destination = m_crewController.transform.position;
 			}

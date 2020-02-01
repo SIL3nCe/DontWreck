@@ -20,7 +20,7 @@ namespace Objects
         private float               m_placementStep;
         private int                 m_pointCount;
 
-        private Unit[]              m_reservedPoints;
+        private GameObject[]        m_reservedPoints;
 
         void Start()
         {
@@ -50,7 +50,7 @@ namespace Objects
 			//
 			//
             m_pointCount = Mathf.CeilToInt((m_placementAngleMax - m_placementAngleMin) / m_placementStep);
-            m_reservedPoints = new Unit[m_pointCount];
+            m_reservedPoints = new GameObject[m_pointCount];
         }
 
         void Update()
@@ -58,7 +58,7 @@ namespace Objects
 			
         }
 
-        public bool GetPlacementPoint(Unit unit, out Vector3 placementPoint)
+        public bool GetPlacementPoint(GameObject unit, out Vector3 placementPoint)
         {
             float currentAngle = m_placementAngleMin;
 
@@ -79,7 +79,7 @@ namespace Objects
             return false;
         }
 
-        public void FreePlacement(Unit unit)
+        public void FreePlacement(GameObject unit)
         {
             for (int i = 0; i < m_reservedPoints.Length; ++i)
             {
@@ -91,19 +91,9 @@ namespace Objects
             }
         }
 
-        public int GetInteractingCount()
+        public virtual void Interact(GameObject unit)
         {
-            int count = 0;
 
-            foreach(Unit unit in m_reservedPoints)
-            {
-                if (unit != null && unit.IsInteracting())
-                {
-                    ++count;
-                }
-            }
-
-            return count;
         }
 
         private void FindStep()
