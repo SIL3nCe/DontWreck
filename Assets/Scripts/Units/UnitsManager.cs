@@ -31,11 +31,11 @@ public class UnitsManager : MonoBehaviour
 	/// Called when the user clicked in the world and that it's a valid position for the units. It triggers the movement of the unit
 	/// </summary>
 	/// <param name="clickPosition"></param>
-	public void OnClicked(Vector3 clickPosition)
+	public void OnClicked(Vector3 clickPosition, GameObject clickedObject)
 	{
 		//
 		//
-		MoveSelectedUnitsToPosition(clickPosition);
+		MoveSelectedUnitsToPosition(clickPosition, clickedObject);
 	}
 
 	public List<Unit> GetUnits()
@@ -43,7 +43,7 @@ public class UnitsManager : MonoBehaviour
 		return m_units;
 	}
 
-	public void MoveSelectedUnitsToPosition(Vector3 position)
+	public void MoveSelectedUnitsToPosition(Vector3 position, GameObject clickedObject)
 	{
 		//
 		// Retrieve the selected units
@@ -55,7 +55,7 @@ public class UnitsManager : MonoBehaviour
 		{
 			Vector3 realDestination = new Vector3(position.x + Random.Range(0f, 3f), position.y + Random.Range(0f, 3f), position.z + Random.Range(0f, 3f));
 
-			unit.GetComponent<Crew.CrewController>().SetDestination(realDestination);
+			unit.SetObjective(realDestination, clickedObject);
 		}
 	}
 }

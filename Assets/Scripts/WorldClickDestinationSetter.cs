@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class WorldClickDestinationSetter : MonoBehaviour
 {
-    public delegate void OnClicked(Vector3 clickPosition, GameObject clickedObject);
+    public delegate void OnClicked(Vector3 clickedPosition, GameObject clickedObject);
 
     OnClicked m_onClickedCallbacks;
 
