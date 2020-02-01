@@ -26,6 +26,7 @@ public class UnitSelector : MonoBehaviour
 	//
 	private bool m_isSelecting;		//< Indicates if the user is currently selecting 
 	private Vector2 m_mouseStartPosition;   //< The current selection start position for the current selection
+	private bool m_canMoveUnit = false;
 
 	private List<Unit> m_selectedUnits = new List<Unit>();
 
@@ -36,7 +37,9 @@ public class UnitSelector : MonoBehaviour
 		m_selectionRectImage.enabled = false;
 	}
 
-    // Update is called once per frame
+    /// <summary>
+	/// 
+	/// </summary>
     void Update()
     {
 		//
@@ -183,11 +186,25 @@ public class UnitSelector : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Return the currently selected units
+	/// </summary>
+	/// <returns>The list of selected units</returns>
+	public List<Unit> GetSelectedUnits()
+	{
+		return m_selectedUnits;
+	}
+
+	//
+	// Private
+	//
 	private void ResetSelection()
 	{
 		foreach (Unit item in m_selectedUnits)
 		{
 			item.SetSelected(false);
 		}
+
+		m_selectedUnits.Clear();
 	}
 }
