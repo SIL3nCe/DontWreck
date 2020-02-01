@@ -7,11 +7,15 @@ public class CannonExplosion : MonoBehaviour
 {
     public GameObject FireFX;
     public GameObject ExplosionFX;
+    public GameObject ThingToSpawn;
 
     // Start is called before the first frame update
     public void Begin(Vector3 vOrigin)
     {
         Instantiate(ExplosionFX, vOrigin, Quaternion.identity);
+
+        if (ThingToSpawn)
+            Instantiate(ThingToSpawn, vOrigin, Quaternion.identity);
 
         if (FireFX)
             GenerateFire(vOrigin, 5.0f, 2);

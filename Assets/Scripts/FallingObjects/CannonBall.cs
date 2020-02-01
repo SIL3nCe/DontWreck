@@ -8,6 +8,7 @@ public class CannonBall : MonoBehaviour
     public GameObject Target;
 
     private float scaleMax;
+
     void Start()
     {
         GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -19,6 +20,7 @@ public class CannonBall : MonoBehaviour
             Target.transform.localScale = new Vector3(scaleMax * 0.1f, scaleMax * 0.1f, scaleMax * 0.1f);
         }
      }
+
     void Update()
     {
         if (Target)
@@ -34,7 +36,6 @@ public class CannonBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-
         CannonExplosion explo = GetComponent<CannonExplosion>();
         if (explo)
         {
