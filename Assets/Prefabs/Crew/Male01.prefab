@@ -6727,6 +6727,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7273979611297758084}
     m_Modifications:
+    - target: {fileID: 1646225625485181789, guid: 3ad31418f2516c249b2c1543f594a290,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646225625485181789, guid: 3ad31418f2516c249b2c1543f594a290,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646225625485181789, guid: 3ad31418f2516c249b2c1543f594a290,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048232334002764631, guid: 3ad31418f2516c249b2c1543f594a290,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048232334002764631, guid: 3ad31418f2516c249b2c1543f594a290,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048232334002764631, guid: 3ad31418f2516c249b2c1543f594a290,
+        type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048232334002764631, guid: 3ad31418f2516c249b2c1543f594a290,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3048232334002764631, guid: 3ad31418f2516c249b2c1543f594a290,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8532429257173882358, guid: 3ad31418f2516c249b2c1543f594a290,
         type: 3}
       propertyPath: m_LocalPosition.x
