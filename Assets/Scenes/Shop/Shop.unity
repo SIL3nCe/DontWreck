@@ -6858,8 +6858,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Welcome to the shop !
 
-    Here you can pay with JambonBoursin to set
-    prisonners free so they can join your crew !'
+    Here you can pay with JambonBoursin, an uncanny
+    perishable commodity due to the unexpected perfect combination of ham slices
+    with infamous garlic and herbs cheese, to set prisonners free so they can join
+    your crew !'
 --- !u!222 &940661393
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -92,6 +92,21 @@ namespace Objects
             }
         }
 
+        public int GetInteractingCount()
+        {
+            int count = 0;
+
+            foreach(Unit unit in m_reservedPoints)
+            {
+                if (unit != null && unit.IsInteracting())
+                {
+                    ++count;
+                }
+            }
+
+            return count;
+        }
+
         private void FindStep()
         {
             float currentAngle = m_placementAngleMin;

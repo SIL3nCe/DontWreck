@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CannonBall : MonoBehaviour
+public class FallingObject : MonoBehaviour
 {
     public Vector3 vHitLocation;
     public GameObject Target;
@@ -36,7 +36,7 @@ public class CannonBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        CannonExplosion explo = GetComponent<CannonExplosion>();
+        FallingExplosion explo = GetComponent<FallingExplosion>();
         if (explo)
         {
             explo.Begin(vHitLocation);
