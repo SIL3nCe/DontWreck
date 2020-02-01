@@ -89,6 +89,11 @@ public class Unit : MonoBehaviour
 
 	public void SetObjective(Vector3 destination, GameObject clickedObject)
 	{
+		if (m_interactableTarget != null)
+		{
+			m_interactableTarget.FreePlacement(this);
+		}
+
 		m_interactableTarget = clickedObject.GetComponent<Objects.InteractableObject>();
 
 		if (m_interactableTarget != null)
