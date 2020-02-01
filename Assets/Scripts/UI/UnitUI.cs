@@ -7,13 +7,13 @@ namespace UI
 {
     public class UnitUI : MonoBehaviour
     {
-        private Canvas  m_canvas;
-        private Image   m_lifeBar;
+        public Canvas  m_canvas;
+        public Image   m_lifeBar;
 
         void Start()
         {
-            m_canvas = transform.Find("Canvas").GetComponent<Canvas>();
-            m_lifeBar = transform.Find("Canvas/Life").GetComponent<Image>();
+            //m_canvas = transform.Find("Canvas").GetComponent<Canvas>();
+            //m_lifeBar = transform.Find("Canvas/Life").GetComponent<Image>();
         }
 
         void Update()
