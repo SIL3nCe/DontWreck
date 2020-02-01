@@ -53,7 +53,7 @@ public class UnitsManager : MonoBehaviour
 		// Set the destination of the units
 		foreach (Unit unit in selectedUnits)
 		{
-			Vector3 realDestination = new Vector3(position.x + Random.Range(0f, 2f), position.y + Random.Range(0f, 2f), position.z + Random.Range(0f, 2f));
+			Vector3 realDestination = new Vector3(position.x + Random.Range(0f, 3f), position.y + Random.Range(0f, 3f), position.z + Random.Range(0f, 3f));
 
 			unit.GetComponent<Crew.CrewController>().SetDestination(realDestination);
 		}
