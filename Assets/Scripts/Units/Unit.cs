@@ -40,6 +40,10 @@ public class Unit : MonoBehaviour
 		m_isSelected = isSelected;
 
 		m_ui.SetDisplayed(isSelected);
+
+		//
+		// Set the highlight property of the material
+		GetComponentInChildren<Renderer>().material.SetInt("_HighLight", isSelected ? 1 : 0);
 	}
 
 	/// <summary>
@@ -55,13 +59,15 @@ public class Unit : MonoBehaviour
 	{
 		if (hp < 0)
 		{
-			m_hp = 0;
+			hp = 0;
 		}
 
 		if (hp > m_maxHp)
 		{
-			m_hp = m_maxHp;
+			hp = m_maxHp;
 		}
+
+		m_hp = hp;
 
 		m_ui.SetLifeBarFill(m_hp / (float)m_maxHp);
 	}

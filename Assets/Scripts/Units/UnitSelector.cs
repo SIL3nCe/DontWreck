@@ -163,7 +163,11 @@ public class UnitSelector : MonoBehaviour
 					//
 					// The current item is selected, add it in the array
 					m_selectedUnits.Add(item as Unit);
-					item.gameObject.GetComponent<Renderer>().material.SetInt("_HighLight", 1);
+					item.SetSelected(true);
+				}
+				else
+				{
+					m_selectedUnits.Remove(item as Unit);
 				}
 			}
 
@@ -175,7 +179,6 @@ public class UnitSelector : MonoBehaviour
 		foreach (Unit item in m_selectedUnits)
 		{
 			item.SetSelected(false);
-			item.gameObject.GetComponent<Renderer>().material.SetInt("_HighLight", 0);
 		}
 	}
 }
