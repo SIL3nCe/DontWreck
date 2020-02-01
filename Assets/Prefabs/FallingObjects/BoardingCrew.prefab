@@ -126,7 +126,7 @@ RectTransform:
   m_GameObject: {fileID: 2252628032308797619}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 3702964149480846007}
   m_RootOrder: 0
@@ -405,7 +405,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cbe89c59bcef2ab4eaad7321e9ecfdd4, type: 2}
+  - {fileID: 2100000, guid: a4830c0bbd4ed1b429b693fa64d39323, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireFX: {fileID: 0}
   ExplosionFX: {fileID: 191186, guid: 26faf61ad70f9734a8fd7ba314cac7b7, type: 3}
-  ThingToSpawn: {fileID: 7273979611297458084, guid: ac5643791d1d66643bfecbeba6a29efb,
+  ThingToSpawn: {fileID: 7273979611297458084, guid: 2e471391723cd8f4aac1954e4c5c76cb,
     type: 3}
 --- !u!136 &7098629862470903736
 CapsuleCollider:
