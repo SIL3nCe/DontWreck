@@ -116,4 +116,14 @@ public class Unit : MonoBehaviour
 	{
 		return m_crewController.GetDestination();
 	}
+
+	public bool IsInteracting()
+	{
+		if (m_interactableTarget != null)
+		{
+			return m_crewController.GetDistanceToDestination() <= m_crewController.GetStoppingDistance();
+		}
+
+		return false;
+	}
 }

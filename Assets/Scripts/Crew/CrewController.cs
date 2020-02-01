@@ -56,7 +56,17 @@ namespace Crew
         {
             return m_navMeshAgent.destination;
         }
-        
+
+        public float GetDistanceToDestination()
+        {
+            return m_navMeshAgent.remainingDistance;
+        }
+
+        public float GetStoppingDistance()
+        {
+            return m_navMeshAgent.stoppingDistance;
+        }
+
         public void OnDrawGizmos()
 		{
 			if (m_navMeshAgent != null)
