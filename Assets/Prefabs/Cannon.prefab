@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6cc968fa938c1e448f67a5c76907204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_placementCircle: {fileID: 0}
+  m_circleCenterOffset: {x: 0, y: -0.59, z: 0.82}
+  m_circleRadius: 3.34
   m_placementAngleMinDeg: 0
   m_placementAngleMaxDeg: 180
   m_characterRadius: 4
-  m_circleCenterOffset: {x: 0, y: -0.59, z: 0.82}
-  m_circleRadius: 3.34
+  m_hpMax: 100
+  m_hp: 100
 --- !u!65 &3380129429343067675
 BoxCollider:
   m_ObjectHideFlags: 0
