@@ -21,13 +21,13 @@ public class UnitSelector : MonoBehaviour
 	[Tooltip("The image that is used to display the selection rect")]
 	public Image m_selectionRectImage;
 
-	public GameObject[] units;
-
 	//
 	// Private
 	//
 	private bool m_isSelecting;		//< Indicates if the user is currently selecting 
-	private Vector2 m_mouseStartPosition;	//< The current selection start position for the current selection
+	private Vector2 m_mouseStartPosition;   //< The current selection start position for the current selection
+
+	private List<Unit> m_selectedUnits;
 
     void Start()
     {
@@ -53,8 +53,12 @@ public class UnitSelector : MonoBehaviour
 			if (Physics.Raycast(ray, out hitInfo))
 			{
 				//
-				// TODO: 
-				Debug.LogError("Raycasted : " + hitInfo.collider.transform.name);
+				// Check it is a unit
+				if (hitInfo.collider.GetComponent<Unit>() != null)
+				{
+					hitInfo.collider.GetComponent<Unit>().SetSelected(true);
+					m_selectedUnits.Add(hitInfo.collider.GetComponent<Unit>());
+				}
 			}
 		}
 
@@ -140,20 +144,25 @@ public class UnitSelector : MonoBehaviour
 
 			//
 			//
-			foreach (var item in units)
+			foreach (var item in UnitsManager.m_instance.GetUnits())
 			{
 				//
 				//
 				if (bounds.Contains(Camera.main.WorldToViewportPoint(item.transform.position)))
 				{
 					//
+					Debug.Log("Select : " + item.transform.name);
 				}
 			}
 
 		}
 	}
 
-	private void OnGUI()
+	private void ResetSelection()
 	{
+		foreach (Unit item in m_selectedUnits)
+		{
+			item.SetSelected(false);
+		}
 	}
 }

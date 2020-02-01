@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+   Project      : GGJ20-JambonBoursin
+   Author		: Yannis Beaux (Kranck)
+   Date		    : 01 / 02 / 2020
+   Description  : Represent a unit
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
