@@ -11,24 +11,29 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+	public Crew.CrewController			m_crewController;
 
 	//
 	// Private
 	//
-	private UI.UnitUI m_ui;
+	private UI.UnitUI					m_ui;
 
-	private int		m_hp;
-	private int		m_maxHp;
-	private bool	m_isSelected;
+	private Objects.InteractableObject	m_interactableTarget;
+
+	private int							m_maxHp;
+	private int							m_hp;
+	private bool						m_isSelected;
 
 	private void Start()
 	{
 		m_ui = transform.Find("UnitUI").GetComponent<UI.UnitUI>();
 
+		m_interactableTarget = null;
+
 		m_maxHp = 100;
 
-		SetSelected(false);
 		SetHP(m_maxHp);
+		SetSelected(false);
 	}
 
 	/// <summary>
@@ -80,5 +85,30 @@ public class Unit : MonoBehaviour
 	public void Hit(int damage)
 	{
 		SetHP(m_hp - damage);
+	}
+
+	public void SetObjective(Vector3 destination, GameObject clickedObject)
+	{
+		if (m_interactableTarget != null)
+		{
+			m_interactableTarget.FreePlacement(this);
+		}
+
+		m_interactableTarget = clickedObject.GetComponent<Objects.InteractableObject>();
+
+		if (m_interactableTarget != null)
+		{
+			if (!m_interactableTarget.GetPlacementPoint(this, out destination))
+			{
+				destination = m_crewController.transform.position;
+			}
+		}
+
+		m_crewController.SetDestination(destination);
+	}
+
+	public Vector3 GetDestination()
+	{
+		return m_crewController.GetDestination();
 	}
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CannonBall : MonoBehaviour
 {
     public Vector3 vHitLocation;
-    public GameObject target;
+    public GameObject Target;
 
     void Start()
     {
@@ -14,23 +14,22 @@ public class CannonBall : MonoBehaviour
      }
     void Update()
     {
-        target.transform.position = vHitLocation;
-        Vector3 scale = target.transform.localScale;
-        scale.x = Mathf.Min(target.transform.localScale.x * 1.01f, 1.0f);
-        scale.y = Mathf.Min(target.transform.localScale.y * 1.01f, 1.0f);
-        target.transform.localScale = scale;
+        Target.transform.position = vHitLocation;
+        Vector3 scale = Target.transform.localScale;
+        scale.x = Mathf.Min(Target.transform.localScale.x * 1.01f, 1.0f);
+        scale.y = Mathf.Min(Target.transform.localScale.y * 1.01f, 1.0f);
+        Target.transform.localScale = scale;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        //TODO Generate FX
 
-        FireGenerator fireGen = GetComponent<FireGenerator>();
-        if (fireGen)
+        CannonExplosion explo = GetComponent<CannonExplosion>();
+        if (explo)
         {
-            fireGen.Generate(vHitLocation, 5.0f, 2);
+            explo.Begin(vHitLocation);
         }
 
-        Destroy(gameObject);   
+        Destroy(gameObject);
     }
 }

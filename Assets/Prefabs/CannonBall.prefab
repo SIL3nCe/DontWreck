@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3902296099409059683}
   - component: {fileID: 2944698447016128388}
   - component: {fileID: 7809475566898815380}
-  - component: {fileID: 7355230857451180770}
   - component: {fileID: 4191925120770644539}
+  - component: {fileID: 8594481105024910882}
   m_Layer: 0
   m_Name: CannonBall
   m_TagString: Untagged
@@ -110,20 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vHitLocation: {x: 0, y: 0, z: 0}
-  target: {fileID: 3869153392385426661}
---- !u!114 &7355230857451180770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2985393750002007521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfb99ce1caeb18245b5c859eb06c3a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FireFX: {fileID: 100000, guid: b870bf55745164141b2efcf1d0e5a51f, type: 3}
+  Target: {fileID: 3869153392385426661}
 --- !u!54 &4191925120770644539
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -138,8 +125,22 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 10
+  m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &8594481105024910882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2985393750002007521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115da4c8bfc7e484981aac278df0493f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireFX: {fileID: 100000, guid: b870bf55745164141b2efcf1d0e5a51f, type: 3}
+  ExplosionFX: {fileID: 191186, guid: 1ad841944fd42fc4592898df36a4f4f2, type: 3}
 --- !u!1 &3869153392385426661
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
 
-public class FireGenerator : MonoBehaviour
+public class CannonExplosion : MonoBehaviour
 {
     public GameObject FireFX;
+    public GameObject ExplosionFX;
 
     // Start is called before the first frame update
-    public void Generate(Vector3 vOrigin, float range, int fireNumber)
+    public void Begin(Vector3 vOrigin)
+    {
+        Instantiate(ExplosionFX, vOrigin, Quaternion.identity);
+
+        GenerateFire(vOrigin, 5.0f, 2);
+    }
+
+    public void GenerateFire(Vector3 vOrigin, float range, int fireNumber)
     {
         int remaining = fireNumber;
         for (int i = 0; i < 50; ++i)
