@@ -64,6 +64,19 @@ namespace Objects
 			
         }
 
+        public bool HasFreePlacementPoint()
+        {
+            foreach(GameObject unit in m_reservedPoints)
+            {
+                if (unit == null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public bool GetPlacementPoint(GameObject unit, out Vector3 placementPoint)
         {
             float currentAngle = m_placementAngleMin;
