@@ -8,7 +8,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class UnitsManager : MonoBehaviour
 {
 	public List<Unit> m_units = new List<Unit>();
@@ -51,11 +51,29 @@ public class UnitsManager : MonoBehaviour
 
 		//
 		// Set the destination of the units
+		float multiplier = 2f;
+		float fAngle = 0f;
 		foreach (Unit unit in selectedUnits)
 		{
-			Vector3 realDestination = new Vector3(position.x + Random.Range(0f, 3f), position.y + Random.Range(0f, 3f), position.z + Random.Range(0f, 3f));
+			//Vector3 realDestination = new Vector3(position.x + Random.Range(-3f, 3f), position.y + Random.Range(-3f, 3f), position.z + Random.Range(-3f, 3f));
+			float fX = Mathf.Sin(Mathf.Deg2Rad * fAngle);
+			float fY = Mathf.Cos(Mathf.Deg2Rad * fAngle);
+
+			fX *= multiplier;
+			fY *= multiplier;
+
+			Vector3 realDestination = new Vector3(position.x + fX, position.y + 0f, position.z + fY);
 
 			unit.GetComponent<Crew.CrewController>().SetDestination(realDestination);
+
+			fAngle += Random.Range(30f, 100f);
+			if (fAngle >= 360)
+			{
+				fAngle -= 360f;
+				multiplier += 1f;
+			}
+
+
 		}
 	}
 }

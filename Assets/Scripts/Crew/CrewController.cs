@@ -51,5 +51,16 @@ namespace Crew
         {
             m_navMeshAgent.destination = destination;
         }
-    }
+
+		public void OnDrawGizmos()
+		{
+			if (m_navMeshAgent != null)
+			{
+				if (m_navMeshAgent.destination != null)
+				{
+					Gizmos.DrawWireSphere(m_navMeshAgent.destination, 0.5f);
+				}
+			}
+		}
+	}
 }
