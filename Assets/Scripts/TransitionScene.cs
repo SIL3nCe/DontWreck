@@ -12,6 +12,9 @@ public class TransitionScene : MonoBehaviour
 
     private bool _updateColor;
 
+    float duration = 5.0f;
+    private float startTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +36,8 @@ public class TransitionScene : MonoBehaviour
     {
         if (_updateColor)
         {
-            var lerp = Mathf.Lerp(0, 100, Time.time * 0.0020f);
+            float t = (Time.time - startTime) / duration;
+            var lerp = Mathf.SmoothStep(0, 1, t);
             m_Panel.GetComponent<Image>().color = new Color(0, 0, 0, lerp);
         }
     }
@@ -47,6 +51,10 @@ public class TransitionScene : MonoBehaviour
         Invoke("_loadScene", tiemoutms / 1000);
         //SceneManager.LoadSceneAsync(TargetScene);
         _updateColor = true;
+
+
+        // Make a note of the time the script started.
+        startTime = Time.time;
     }
 
     void onSceneLoaded(Scene scene, LoadSceneMode mode)
