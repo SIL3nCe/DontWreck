@@ -65,6 +65,14 @@ public class UnitSelector : MonoBehaviour
 					hitInfo.collider.GetComponent<Unit>().SetSelected(true);
 					m_selectedUnits.Add(hitInfo.collider.GetComponent<Unit>());
 				}
+				else
+				{
+					ResetSelection();
+				}
+			}
+			else
+			{
+				ResetSelection();
 			}
 		}
 
@@ -168,6 +176,7 @@ public class UnitSelector : MonoBehaviour
 				else
 				{
 					m_selectedUnits.Remove(item as Unit);
+					item.SetSelected(false);
 				}
 			}
 
