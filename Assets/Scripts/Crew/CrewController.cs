@@ -27,7 +27,7 @@ namespace Crew
             if (m_autoAttachToWorldClicker)
             {
                 GameObject gameManager = GameObject.Find("GameManager");
-                gameManager.GetComponent<WorldClickDestinationSetter>().AddOnClickedCallback(SetDestination);
+                gameManager.GetComponent<WorldClickDestinationSetter>().AddOnClickedCallback((Vector3 clickedPos, GameObject clickedObject) => SetDestination(clickedPos));
             }
         }
 
@@ -51,5 +51,22 @@ namespace Crew
         {
             m_navMeshAgent.destination = destination;
         }
+
+        public Vector3 GetDestination()
+        {
+            return m_navMeshAgent.destination;
+        }
+        
+        public void OnDrawGizmos()
+		{
+			if (m_navMeshAgent != null)
+			{
+				if (m_navMeshAgent.destination != null)
+				{
+					Gizmos.DrawWireSphere(m_navMeshAgent.destination, 0.5f);
+				}
+			}
+		}
+        
     }
 }

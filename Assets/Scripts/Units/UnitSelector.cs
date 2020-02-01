@@ -173,7 +173,10 @@ public class UnitSelector : MonoBehaviour
 				{
 					//
 					// The current item is selected, add it in the array
-					m_selectedUnits.Add(item as Unit);
+					if (m_selectedUnits.Find(x => x == item) == null)
+					{
+						m_selectedUnits.Add(item as Unit);
+					}
 					item.SetSelected(true);
 				}
 				else

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class WorldClickDestinationSetter : MonoBehaviour
 {
-    public delegate void OnClicked(Vector3 clickPosition);
+    public delegate void OnClicked(Vector3 clickedPosition, GameObject clickedObject);
 
     OnClicked m_onClickedCallbacks;
 
@@ -20,10 +20,10 @@ public class WorldClickDestinationSetter : MonoBehaviour
         {
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
-
+            
             if (Physics.Raycast(mouseRay, out hitInfo))
             {
-                m_onClickedCallbacks?.Invoke(hitInfo.point);
+                m_onClickedCallbacks?.Invoke(hitInfo.point, hitInfo.collider.gameObject);
             }
         }
     }
