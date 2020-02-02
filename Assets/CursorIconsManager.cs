@@ -57,6 +57,14 @@ public class CursorIconsManager : MonoBehaviour
 				{
 					Cursor.SetCursor(m_interactFireIcon, new Vector2(0, 32.0f), CursorMode.Auto);
 				}
+				else if (hitInfo.collider.GetComponent<Objects.InteractableTree>() != null)
+				{
+					Cursor.SetCursor(m_interactWoodIcon, new Vector2(0, 0.0f), CursorMode.Auto);
+				}
+				else if (hitInfo.collider.GetComponent<Objects.InteractableCoal>() != null)
+				{
+					Cursor.SetCursor(m_interactCoalIcon, new Vector2(0, 0.0f), CursorMode.Auto);
+				}
 				else
 				{
 					Cursor.SetCursor(m_defaultIcon, Vector2.zero, CursorMode.Auto);
