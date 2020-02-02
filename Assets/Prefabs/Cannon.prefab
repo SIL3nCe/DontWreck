@@ -60,8 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_circleCenterOffset: {x: 0, y: 0, z: 0}
   m_circleRadius: 4
-  m_placementAngleMinDeg: 0
-  m_placementAngleMaxDeg: 180
+  m_placementAngleMinDeg: 30
+  m_placementAngleMaxDeg: 150
   m_characterRadius: 4
   m_hpMax: 100
   m_hp: 100
