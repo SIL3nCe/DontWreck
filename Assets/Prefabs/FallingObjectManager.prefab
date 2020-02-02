@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Radius: 70
   Timer: 10
+  ChancesToSpawnBall: 70
+  SpawnHeight: 60
   FallingCannonBall: {fileID: 2985393750002007521, guid: 83dcf96a26898fb44888745ad7fa0af3,
     type: 3}
   FallingEnemy: {fileID: 6114586158338217519, guid: ef5d4d4de4940994ea807fbccbf68e1b,

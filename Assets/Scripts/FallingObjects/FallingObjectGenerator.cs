@@ -7,8 +7,12 @@ public class FallingObjectGenerator : MonoBehaviour
 {
     public float Radius;
     
-    [Range(5, 20)]
+    [Range(1, 20)]
     public float Timer = 3.0f;
+
+    public int ChancesToSpawnBall;
+
+    public float SpawnHeight;
 
     public GameObject FallingCannonBall;
     public GameObject FallingEnemy;
@@ -26,7 +30,7 @@ public class FallingObjectGenerator : MonoBehaviour
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemy.Length < 10)
         {
-            if (Random.Range(0, 100) >= 70)
+            if (Random.Range(0, 100) >= ChancesToSpawnBall)
             {
                 objectToSpawn = FallingEnemy;
             }
@@ -41,7 +45,7 @@ public class FallingObjectGenerator : MonoBehaviour
             //GameObject prim = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             //prim.transform.position = originHit.position;
 
-            Vector3 randLocation = Random.insideUnitSphere * Radius;
+            Vector3 randLocation = gameObject.transform.position + Random.insideUnitSphere * Radius;
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randLocation, out hit, Radius, NavMesh.AllAreas))
             {
@@ -60,7 +64,7 @@ public class FallingObjectGenerator : MonoBehaviour
                         //    Debug.DrawLine(path.corners[j], path.corners[j + 1], Color.white, 500.0f);
                         //}
 
-                        GameObject fallingObject = Instantiate(objectToSpawn, new Vector3(finalPosition.x, finalPosition.y + 60.0f, finalPosition.z), Quaternion.identity);
+                        GameObject fallingObject = Instantiate(objectToSpawn, new Vector3(finalPosition.x, SpawnHeight, finalPosition.z), Quaternion.identity);
                         fallingObject.GetComponent<FallingObject>().vHitLocation = finalPosition;
                     }
                 }
