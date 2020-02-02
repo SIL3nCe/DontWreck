@@ -119,9 +119,12 @@ public class Unit : MonoBehaviour
 	{
 		SetHP(m_hp - damages);
 
-		PlayDeathSound();
-		GameManager.m_instance.m_unitManager.UnpopUnit(this);
-		//TODO destroy
+		if (m_hp <= 0)
+		{
+			PlayDeathSound();
+			GameManager.m_instance.m_unitManager.UnpopUnit(this);
+			Destroy(gameObject);
+		}
 
 		return m_hp;
 	}
