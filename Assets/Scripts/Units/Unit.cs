@@ -96,16 +96,21 @@ public class Unit : MonoBehaviour
 			m_interactableTarget.FreePlacement(gameObject);
 		}
 
-		m_interactableTarget = clickedObject.GetComponent<Objects.InteractableObject>();
-
 		//If the user clicked on an interactable object
 		//We attempt to reserve a placement point
-		if (m_interactableTarget != null)
+		if (clickedObject != null)
 		{
-			//If we fail to reserve we stay at our current position
-			if (!m_interactableTarget.GetPlacementPoint(gameObject, out destination))
+			if (clickedObject.GetComponent<Objects.InteractableObject>() != null)
 			{
-				destination = m_crewController.transform.position;
+				//
+				// Store the interactable
+				m_interactableTarget = clickedObject.GetComponent<Objects.InteractableObject>();
+
+				//If we fail to reserve we stay at our current position
+				if (!m_interactableTarget.GetPlacementPoint(gameObject, out destination))
+				{
+					destination = m_crewController.transform.position;
+				}
 			}
 		}
 

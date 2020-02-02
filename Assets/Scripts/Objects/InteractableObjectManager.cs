@@ -20,6 +20,9 @@ public class InteractableObjectManager : MonoBehaviour
                 NavMeshPath navPath = new NavMeshPath();
                 NavMesh.CalculatePath(vLocation, vPointLocation, NavMesh.AllAreas, navPath);
 
+                //GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                //prim2.transform.position = vPointLocation;
+                
                 float fRes = GetPathLength(navPath);
                 if (fRes < fCurrDist)
                 {
@@ -30,8 +33,6 @@ public class InteractableObjectManager : MonoBehaviour
             }
         }
 
-        //GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //prim2.transform.position = debug;
         return nearestObject;
     }
 

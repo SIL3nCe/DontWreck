@@ -75,7 +75,16 @@ namespace Objects
                     bReserved = false,
                 };
 
+                GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                prim2.transform.position = aLocations[pointNum].vLocation;
+
                 fCurrentAngle += m_placementStep;
+
+                if ((Mathf.Deg2Rad * 360.0f) - m_placementStep < fCurrentAngle)
+                {
+                    m_pointCount = pointNum;
+                    break;
+                }
             }
         }
 

@@ -14,12 +14,16 @@ namespace Crew
         private Animator        m_animator;
 
         private int m_speedHash;
+		private void Awake()
+		{
+			//
+			//
+			m_navMeshAgent = GetComponent<NavMeshAgent>();
+			m_animator = GetComponent<Animator>();
+		}
 
-        void Start()
+		void Start()
         {
-            m_navMeshAgent = GetComponent<NavMeshAgent>();
-            m_animator = GetComponent<Animator>();
-
             m_speedHash = Animator.StringToHash("Speed");
 
             m_navMeshAgent.updateRotation = false;

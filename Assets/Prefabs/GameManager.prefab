@@ -600,60 +600,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1148a3a71f0798841adc5e834df94cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_units:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_spawnPoint: {fileID: 0}
+  m_spawnStartDestination: {fileID: 0}
+  m_unitPrefab: {fileID: 7273979611297458084, guid: ac5643791d1d66643bfecbeba6a29efb,
+    type: 3}
 --- !u!114 &703963040832369562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +619,7 @@ MonoBehaviour:
   m_worldClickDestinationSetter: {fileID: 3694560700328044336}
   m_unitSelector: {fileID: 2514700623092428753}
   m_unitManager: {fileID: 5080207016450052905}
+  m_resourcesManager: {fileID: 364840308}
 --- !u!1 &4337646048539889685
 GameObject:
   m_ObjectHideFlags: 0
