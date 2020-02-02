@@ -21,5 +21,6 @@ public class IslandManager : MonoBehaviour
     void OnTideUp()
     {
         //GameManager.EndLevel();
+        GameObject.Find("OutputTransitionScene").GetComponent<TransitionScene>().LoadScene(5000);
     }
 }
