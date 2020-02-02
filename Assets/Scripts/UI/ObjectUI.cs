@@ -43,7 +43,7 @@ namespace UI
 
         public void SetLifeBarDisplayed(bool displayed)
         {
-            if (displayed)
+            if (!displayed)
             {
                 m_lifeBarContainer.transform.localScale = new Vector3();
             }
@@ -68,7 +68,7 @@ namespace UI
 
         public void SetProgressBarDisplayed(bool displayed)
         {
-            if (displayed)
+            if (!displayed)
             {
                 m_progressBarContainer.transform.localScale = new Vector3();
             }

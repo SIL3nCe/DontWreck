@@ -90,6 +90,7 @@ namespace Objects
             }
 
             SetHp(m_hp);
+            m_objectUI.SetProgressBarDisplayed(false);
         }
 
         void Update()
@@ -112,7 +113,7 @@ namespace Objects
 
             m_objectUI.SetLifeBarFill(m_hp / (float)m_hpMax);
 
-            m_objectUI.SetDisplayed(m_hp != m_hpMax);
+            m_objectUI.SetLifeBarDisplayed(m_hp != m_hpMax);
         }
 
         public bool HasFreePlacementPoint(out Vector3 vLocation)
