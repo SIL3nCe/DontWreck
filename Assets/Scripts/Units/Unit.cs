@@ -130,7 +130,7 @@ public class Unit : MonoBehaviour
 
     public void Attack()
     {
-
+		Interact();
     }
 
     public void Repair()
@@ -140,8 +140,8 @@ public class Unit : MonoBehaviour
 
     public void Extenguish()
     {
-
-    }
+		Interact();
+	}
 
     public void Interact()
     {
@@ -207,6 +207,15 @@ public class Unit : MonoBehaviour
 			if (newHP == m_interactableTarget.m_hpMax)
 			{
 				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+			}
+		}
+
+		if (newHP == 0)
+		{
+			if (m_interactableTarget.GetComponent<Objects.InteractableFire>())
+			{
+				m_crewController.SetAnimation(Crew.CrewController.AnimationType.E_NONE);
+				m_interactableTarget = null;
 			}
 		}
 	}
@@ -291,8 +300,7 @@ public class Unit : MonoBehaviour
 				PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
 			}
 		}
-
-		if (m_interactableTarget.GetComponent<Objects.InteractableBoatObject>())
+		else if (m_interactableTarget.GetComponent<Objects.InteractableBoatObject>())
 		{
 			if (m_interactableTarget.m_hp != m_interactableTarget.m_hpMax)
 			{
@@ -302,6 +310,10 @@ public class Unit : MonoBehaviour
 			{
 				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
 			}
+		}
+		else if (m_interactableTarget.GetComponent<Objects.InteractableFire>())
+		{
+			PlayAnimation(Crew.CrewController.AnimationType.E_PIPIYING);
 		}
 	}
 }
