@@ -6,9 +6,9 @@ namespace Objects
 {
     public class InteractableCannon : InteractableObject
     {
-        void Start()
+        new protected void Start()
         {
-
+            base.Start();
         }
 
         void Update()
