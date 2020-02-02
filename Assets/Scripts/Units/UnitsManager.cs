@@ -58,6 +58,8 @@ public class UnitsManager : MonoBehaviour
 	{
 		GameManager.m_instance.m_resourcesManager.AddCrew(-1);
 		m_units.Remove(unit);
+		GameManager.m_instance.m_unitSelector.GetSelectedUnits().Remove(unit);
+		Destroy(unit);
 	}
 
 	public void SpawnUnit()

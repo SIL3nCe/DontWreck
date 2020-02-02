@@ -5314,7 +5314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8565c354b186066489209f57b6ec5d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_deathSound: {fileID: 8300000, guid: cbb30c35c680e384693192aba676873c, type: 3}
+  m_deathSound: {fileID: 8300000, guid: e30868183e53f2f4e8c49e45e4202bb4, type: 3}
 --- !u!1 &7273979611297458086
 GameObject:
   m_ObjectHideFlags: 0

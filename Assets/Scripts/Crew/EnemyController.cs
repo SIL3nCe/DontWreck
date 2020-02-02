@@ -79,9 +79,8 @@ public class EnemyController : MonoBehaviour
 
     public void PlayDeathSound()
     {
-        GetComponent<AudioSource>().clip = m_deathSound;
-        GetComponent<AudioSource>().Play();
-    }
+		AudioSource.PlayClipAtPoint(m_deathSound, Camera.main.transform.position, 0.4f);
+	}
 
     public void StopSounds()
     {

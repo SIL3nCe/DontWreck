@@ -70,11 +70,20 @@ public class FallingExplosion : MonoBehaviour
                 //if (body)
                 //    body.AddForce(new Vector3(100.0f, 100.0f, 100.0f));
                 */
-				charac.GetComponent<Unit>().PlayDeathSound();
-
-				GameManager.m_instance.m_unitManager.UnpopUnit(charac.GetComponent<Unit>());
-
-				Destroy(charac);
+				if (charac != null)
+				{
+					if (charac.GetComponent<Unit>() != null)
+					{
+						charac.GetComponent<Unit>().PlayDeathSound();
+						GameManager.m_instance.m_unitManager.UnpopUnit(charac.GetComponent<Unit>());
+						Destroy(charac);
+					}
+					else if (charac.GetComponent<EnemyController>() != null)
+					{
+						charac.GetComponent<EnemyController>().PlayDeathSound();
+						Destroy(charac);
+					}
+				}
             }
         }
     }
