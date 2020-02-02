@@ -274,5 +274,17 @@ public class Unit : MonoBehaviour
 				PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
 			}
 		}
+
+		if (m_interactableTarget.GetComponent<Objects.InteractableBoatObject>())
+		{
+			if (m_interactableTarget.m_hp != m_interactableTarget.m_hpMax)
+			{
+				PlayAnimation(Crew.CrewController.AnimationType.E_REPAIRING);
+			}
+			else
+			{
+				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+			}
+		}
 	}
 }
