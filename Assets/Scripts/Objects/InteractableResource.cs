@@ -7,7 +7,9 @@ namespace Objects
     public abstract class InteractableResource : InteractableObject
     {
 
-        new protected void Start()
+		public AudioClip[] m_gatherClip;
+
+		new protected void Start()
         {
             base.Start();
         }
@@ -29,9 +31,17 @@ namespace Objects
         private void CrewInteract()
         {
             ModHp(-1);
-            if (m_hp <= 0)
+			GetResource();
+
+			//
+			// Play audio clips 
+			if (GetComponent<AudioSource>() != null && m_gatherClip.Length > 0)
+			{
+				GetComponent<AudioSource>().PlayOneShot(m_gatherClip[Random.Range(0, m_gatherClip.Length)]);
+			}
+
+			if (m_hp <= 0)
             {
-                GetResource();
                 Destroy(gameObject);
             }
         }
