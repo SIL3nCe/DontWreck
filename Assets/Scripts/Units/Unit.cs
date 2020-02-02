@@ -16,6 +16,9 @@ public class Unit : MonoBehaviour
 	[Header("Sounds")]
 	public AudioClip[] m_setDestinationSounds;
 	public AudioClip[] m_selectedSounds;
+    public AudioClip m_deathSound;
+    public AudioClip m_repairSound;
+    public AudioClip m_urinationSound;
 
 	//
 	// Private
@@ -151,5 +154,36 @@ public class Unit : MonoBehaviour
 		}
 
 		return false;
-	}
+    }
+
+    public void PlayDeathSound()
+    {
+        GetComponent<AudioSource>().clip = m_deathSound;
+        GetComponent<AudioSource>().Play();
+    }
+
+    public void PlayRepairSound()
+    {
+        GetComponent<AudioSource>().clip = m_repairSound;
+        GetComponent<AudioSource>().Play();
+    }
+
+    public void PlayUrinationSound()
+    {
+        AudioSource audio = GetComponent<AudioSource>();
+        if (audio.clip != m_urinationSound)
+        {
+            audio.clip = m_urinationSound;
+            audio.Play();
+        }
+        else if (!audio.isPlaying)
+        {
+            audio.Play();
+        }
+    }
+
+    public void StopSounds()
+    {
+        GetComponent<AudioSource>().Stop();
+    }
 }
