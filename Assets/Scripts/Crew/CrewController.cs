@@ -10,6 +10,7 @@ namespace Crew
         public enum AnimationType
         {
             E_INTERACTING,
+            E_REPAIRING,
             E_NONE
         }
 
@@ -21,6 +22,7 @@ namespace Crew
 
         private int             m_speedHash;
         private int             m_interactHash;
+        private int             m_repairHash;
 
         private AnimationType   m_currentAnimation;
 
@@ -38,6 +40,7 @@ namespace Crew
         {
             m_speedHash = Animator.StringToHash("Speed");
             m_interactHash = Animator.StringToHash("Interact");
+            m_repairHash = Animator.StringToHash("Repair");
 
             m_navMeshAgent.updateRotation = false;
 
@@ -107,6 +110,12 @@ namespace Crew
                 case AnimationType.E_INTERACTING:
                 {
                     m_animator.SetBool(m_interactHash, activate);
+                }
+                break;
+
+                case AnimationType.E_REPAIRING:
+                {
+                    m_animator.SetBool(m_repairHash, activate);
                 }
                 break;
             }

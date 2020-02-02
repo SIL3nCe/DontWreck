@@ -72,7 +72,12 @@ namespace Objects
 
         private void CrewInteract()
         {
-            if (Charge(10))
+            if (m_hp != m_hpMax)
+            {
+                ModHp(10);
+                Charge(200);
+            }
+            else if (Charge(10))
             {
                 Fire();
             }

@@ -54,7 +54,8 @@ public class Unit : MonoBehaviour
 			float fVal = Mathf.Min(2.0f * Time.deltaTime, 1);
 			transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fVal);
 
-			PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
+
+			PlayRightAnimation();
 		}
 		else
 		{
@@ -131,7 +132,7 @@ public class Unit : MonoBehaviour
 
     public void Repair()
     {
-
+		Interact();
     }
 
     public void Extenguish()
@@ -258,5 +259,20 @@ public class Unit : MonoBehaviour
 		}
 
 		m_crewController.SetAnimation(animationType);
+	}
+
+	private void PlayRightAnimation()
+	{
+		if (m_interactableTarget.GetComponent<Objects.InteractableCannon>())
+		{
+			if (m_interactableTarget.m_hp != m_interactableTarget.m_hpMax)
+			{
+				PlayAnimation(Crew.CrewController.AnimationType.E_REPAIRING);
+			}
+			else
+			{
+				PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
+			}
+		}
 	}
 }
