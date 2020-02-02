@@ -16,13 +16,21 @@ public class EnemyController : MonoBehaviour
 
     public AudioClip m_deathSound;
 
+    private int m_hp;
+
+    private UI.UnitUI m_ui;
+
     private void Start()
     {
+        m_ui = transform.Find("EnemyUI").GetComponent<UI.UnitUI>();
+
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<Animator>();
 
         m_speedHash = Animator.StringToHash("Speed");
         m_attackHash = Animator.StringToHash("Attack");
+
+        m_hp = 100;
     }
 
     void Update()
@@ -141,6 +149,21 @@ public class EnemyController : MonoBehaviour
     public void Damage()
     {
 
+    }
+
+    public int TakeDamage(int damages)
+    {
+        m_hp -= damages;
+
+        m_ui.SetLifeBarFill(m_hp / 100.0f);
+
+        if (m_hp <= 0)
+        {
+            PlayDeathSound();
+            Destroy(gameObject);
+        }
+
+        return m_hp;
     }
 
     public void Attack()
