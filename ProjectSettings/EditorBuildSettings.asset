@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tchoalien.unity
     guid: 24cb7b3179fcf4558a3bcf2c0366335e
+  - enabled: 1
+    path: Assets/Scenes/Boat Battle/Boat Battle.unity
+    guid: 7515a5291e0f21e4585e797839b82b2e
+  - enabled: 1
+    path: Assets/Scenes/Shop/Shop.unity
+    guid: febcf58beeef6f044a7d906f2a763fa0
+  - enabled: 1
+    path: Assets/Scenes/Island/Island.unity
+    guid: 9679a6fbcbd0aee429173081b70f6f09
   m_configObjects: {}
