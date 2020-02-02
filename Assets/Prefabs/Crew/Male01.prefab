@@ -5253,6 +5253,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b11bff397eade644d879e9671ac88454, type: 3}
   - {fileID: 8300000, guid: 79dd7b3374d552f40a710412bbecacf1, type: 3}
   - {fileID: 8300000, guid: 266b3c5a4fdd34041ac1aa8378907ebb, type: 3}
+  - {fileID: 8300000, guid: b6d1ed71205fbdf46a8709a6193561ec, type: 3}
+  - {fileID: 8300000, guid: b6d1ed71205fbdf46a8709a6193561ec, type: 3}
 --- !u!136 &984176648228248518
 CapsuleCollider:
   m_ObjectHideFlags: 0
