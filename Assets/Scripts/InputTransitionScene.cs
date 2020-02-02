@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class InputTransitionScene : MonoBehaviour
 {
@@ -9,12 +10,18 @@ public class InputTransitionScene : MonoBehaviour
     private GameObject m_Panel;
     private bool _updatePanel;
 
+    private bool _dollyPositioned;
+
+    public CinemachineDollyCart DollyCart;
+    public GameObject FirstCameraPrefab;
+
     float duration = 5.0f;
     private float startTime;
 
     // Start is called before the first frame update
     void Start()
     {
+        _dollyPositioned = false;
     }
     private void Awake()
     {
@@ -25,12 +32,26 @@ public class InputTransitionScene : MonoBehaviour
         _updatePanel = true;
         // Make a note of the time the script started.
         startTime = Time.time;
+
+        //Invoke("ActiveCamera", 10);
+    }
+
+    private void ActiveCamera()
+    {
+        FirstCameraPrefab.gameObject.SetActive(true);
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(DollyCart.m_Position);
+        if( DollyCart.m_Position >= 1167.00f && ! _dollyPositioned)
+        {
+            ActiveCamera();
+            _dollyPositioned = true;
+        }
+
         if (_updatePanel)
         {
             float t = (Time.time - startTime) / duration;

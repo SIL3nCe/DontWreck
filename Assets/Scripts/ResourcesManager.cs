@@ -57,6 +57,13 @@ public class ResourcesManager : MonoBehaviour
 		m_inGameHUDGUIManager.SetCrewCount(m_currentCrewCount);
 
 		//
+		// Spawn the units with a 5s delay
+		Invoke("SpawnStartUnits", 5f);
+	}
+
+	public void SpawnStartUnits()
+	{
+		//
 		// Spawn all the units
 		for (int unit = 0; unit < m_currentCrewCount; ++unit)
 		{

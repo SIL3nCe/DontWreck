@@ -15,7 +15,7 @@ public class InteractableObjectManager : MonoBehaviour
         foreach (Objects.InteractableObject interactableObject in InteractableObjectList)
         {
             Vector3 vPointLocation;
-            if (interactableObject.HasFreePlacementPoint(out vPointLocation))
+            if (interactableObject.HasFreePlacementPoint(out vPointLocation) && interactableObject.m_hp > 0)
             {
                 NavMeshPath navPath = new NavMeshPath();
                 NavMesh.CalculatePath(vLocation, vPointLocation, NavMesh.AllAreas, navPath);
