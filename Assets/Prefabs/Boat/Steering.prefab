@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 8391733963849166941}
   - component: {fileID: 8391733963850134045}
   - component: {fileID: 2215056235247317949}
-  - component: {fileID: 2215056235247317947}
+  - component: {fileID: 7509462796317856139}
   m_Layer: 0
   m_Name: Steering
   m_TagString: Untagged
@@ -190,7 +190,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.561, y: 6.561, z: 2.12291}
   m_Center: {x: 0, y: 0, z: 1.061455}
---- !u!114 &2215056235247317947
+--- !u!114 &7509462796317856139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8391733963852131421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6cc968fa938c1e448f67a5c76907204, type: 3}
+  m_Script: {fileID: 11500000, guid: fe7c0d44fce18444e8b86eed5c970b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_circleCenterOffset: {x: 0, y: -2.5, z: 1.6}
