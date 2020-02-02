@@ -88,6 +88,8 @@ namespace Objects
                     break;
                 }
             }
+
+            SetHp(m_hp);
         }
 
         void Update()
