@@ -736,7 +736,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 602056857}
-  m_LocalRotation: {x: 0.20883273, y: 0.23045866, z: -0.05071074, w: 0.94905543}
+  m_LocalRotation: {x: 0.20883274, y: 0.23045862, z: -0.050710738, w: 0.94905543}
   m_LocalPosition: {x: -352.1644, y: 355.1299, z: -682.3689}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1396,7 +1396,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513591469}
-  m_LocalRotation: {x: 0.20883273, y: 0.23045866, z: -0.05071074, w: 0.94905543}
+  m_LocalRotation: {x: 0.20883274, y: 0.23045862, z: -0.050710738, w: 0.94905543}
   m_LocalPosition: {x: -352.1644, y: 355.1299, z: -682.3689}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5099,6 +5099,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 238694090, guid: 38f466442119fd843a426e8ce494c62a, type: 3}
+      propertyPath: m_interactFireIcon
+      value: 
+      objectReference: {fileID: 2800000, guid: 74b18ed816a49c64bb11ca6262b37bdb, type: 3}
     - target: {fileID: 1844719231, guid: 38f466442119fd843a426e8ce494c62a, type: 3}
       propertyPath: InteractableObjectList.Array.data[0]
       value: 
