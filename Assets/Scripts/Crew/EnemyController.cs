@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    private Objects.InteractableObject currentTarget;
+    private Objects.InteractableObject ObjectTarget;
+    private GameObject CrewTarget;
 
     private NavMeshAgent m_navMeshAgent;
     private Animator m_animator;
@@ -26,18 +27,18 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (!currentTarget)
+        if (!ObjectTarget && !CrewTarget)
         {
             // Select target
             InteractableObjectManager manager = GameManager.m_instance.GetComponent<InteractableObjectManager>();
             if (manager)
             {
                 Vector3 vLocation;
-                currentTarget = manager.GetNearestAvailableOBject(gameObject.transform.position);
-                if (currentTarget)
+                ObjectTarget = manager.GetNearestAvailableOBject(gameObject.transform.position);
+                if (ObjectTarget)
                 {
                     // Attack object
-                    if (currentTarget.GetPlacementPoint(gameObject, out vLocation))
+                    if (ObjectTarget.GetPlacementPoint(gameObject, out vLocation))
                     {
                         //GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                         //prim2.transform.position = vLocation;
@@ -50,22 +51,58 @@ public class EnemyController : MonoBehaviour
                     // TODO
                 }
             }
+
+            //Debug
+            //ObjectTarget = null;
+
+            // No more object to attack
+            if (!ObjectTarget)
+            {
+                GameObject[] Crew;
+                Crew = GameObject.FindGameObjectsWithTag("Crew");
+
+                float fDist = float.MaxValue;
+                foreach (GameObject crew in Crew)
+                {
+                    float fVal = (crew.transform.position - gameObject.transform.position).sqrMagnitude;
+                    if (fVal < fDist)
+                    {
+                        fDist = fVal;
+                        CrewTarget = crew;
+                    }
+                }
+            }
         }
-        else
+        else if (ObjectTarget)
         {
             if (m_navMeshAgent.enabled)
             {
                 if (m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance)
                 {
-                    Quaternion targetRotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
+                    Quaternion targetRotation = Quaternion.LookRotation(ObjectTarget.transform.position - transform.position);
                     float fVal = Mathf.Min(2.0f * Time.deltaTime, 1);
                     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fVal);
                     m_animator.SetBool(m_attackHash, true);
                 }
             }
         }
+        else if (CrewTarget)
+        {
+            if (m_navMeshAgent.enabled)
+            {
+                m_navMeshAgent.destination = CrewTarget.transform.position;
+                if (m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance)
+                {
+                    m_animator.SetBool(m_attackHash, true);
+                }
+                else
+                {
+                    m_animator.SetBool(m_attackHash, false);
+                }
+            }
+        }
 
-        if (!currentTarget)
+        if (!ObjectTarget && !CrewTarget)
         {
             m_animator.SetBool(m_attackHash, false);
         }
@@ -75,18 +112,19 @@ public class EnemyController : MonoBehaviour
 
     public void OnTargetHpChanged(int newHP)
     {
-        if (newHP == 0)
+        if (newHP <= 0)
         {
-            currentTarget = null;
+            ObjectTarget = null;
+            CrewTarget = null;
             m_animator.SetBool(m_attackHash, false);
         }
     }
 
     public void OnDeath()
     {
-        if (currentTarget != null)
+        if (ObjectTarget != null)
         {
-            currentTarget.FreePlacement(gameObject);
+            ObjectTarget.FreePlacement(gameObject);
         }
     }
 
@@ -107,6 +145,13 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
-        currentTarget?.Interact(gameObject);
+        Unit crew = CrewTarget.GetComponent<Unit>();
+        if (crew)
+        {
+            OnTargetHpChanged(crew.TakeDamages(10));
+            return;
+        }
+
+        ObjectTarget?.Interact(gameObject);
     }
 }

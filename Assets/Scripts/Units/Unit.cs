@@ -101,6 +101,21 @@ public class Unit : MonoBehaviour
 		return m_isSelected;
 	}
 
+	/// <summary>
+	/// Take damages from EnemyController
+	/// </summary>
+	/// <returns>Remaining hp</returns>
+	public int TakeDamages(int damages)
+	{
+		SetHP(m_hp - damages);
+
+		PlayDeathSound();
+		GameManager.m_instance.m_unitManager.UnpopUnit(this);
+		//TODO destroy
+
+		return m_hp;
+	}
+
 	public void SetHP(int hp)
 	{
 		if (hp < 0)
