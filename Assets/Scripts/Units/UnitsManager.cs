@@ -19,6 +19,7 @@ public class UnitsManager : MonoBehaviour
 
 	[Header("Unit")]
 	public GameObject m_unitPrefab;
+	public AudioClip m_unitSpawnAudioClip;
 
 	//
 	//
@@ -67,6 +68,10 @@ public class UnitsManager : MonoBehaviour
 		//
 		// Add the unit to the array of units
 		m_units.Add(newUnit.GetComponent<Unit>());
+
+		//
+		//
+		newUnit.GetComponent<AudioSource>().PlayOneShot(m_unitSpawnAudioClip);
 	}
 
 	public void MoveSelectedUnitsToPosition(Vector3 position, GameObject clickedObject)

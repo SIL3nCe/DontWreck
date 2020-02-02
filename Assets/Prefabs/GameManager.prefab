@@ -604,6 +604,8 @@ MonoBehaviour:
   m_spawnStartDestination: {fileID: 0}
   m_unitPrefab: {fileID: 7273979611297458084, guid: ac5643791d1d66643bfecbeba6a29efb,
     type: 3}
+  m_unitSpawnAudioClip: {fileID: 8300000, guid: c94ec3747cd18d640bf4349a2857e592,
+    type: 3}
 --- !u!114 &703963040832369562
 MonoBehaviour:
   m_ObjectHideFlags: 0
