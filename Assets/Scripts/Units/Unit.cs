@@ -191,6 +191,11 @@ public class Unit : MonoBehaviour
 		}		
 	}
 
+	public void OnTargetHpChanged(int newHP)
+	{
+
+	}
+
 	public Vector3 GetDestination()
 	{
 		return m_crewController.GetDestination();

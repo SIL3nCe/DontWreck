@@ -117,6 +117,28 @@ namespace Objects
             m_objectUI.SetLifeBarFill(m_hp / (float)m_hpMax);
 
             m_objectUI.SetLifeBarDisplayed(m_hp != m_hpMax);
+
+            foreach(SLocation location in aLocations)
+            {
+                if (location.unit != null)
+                {
+                    EnemyController enemy = location.unit.GetComponent<EnemyController>();
+
+                    if (enemy)
+                    {
+                        enemy.OnTargetHpChanged(m_hp);
+                    }
+                    else
+                    {
+                        Unit crew = location.unit.GetComponent<Unit>();
+
+                        if (crew)
+                        {
+                            crew.OnTargetHpChanged(m_hp);
+                        }
+                    }
+                }
+            }
         }
 
         public void ModHp(int modification)

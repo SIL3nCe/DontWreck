@@ -60,18 +60,19 @@ public class EnemyController : MonoBehaviour
                     Quaternion targetRotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
                     float fVal = Mathf.Min(2.0f * Time.deltaTime, 1);
                     transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fVal);
+                    m_animator.SetBool(m_attackHash, true);
                 }
             }
         }
 
         m_animator.SetFloat(m_speedHash, m_navMeshAgent.velocity.normalized.magnitude);
+    }
 
-        if (currentTarget != null && m_navMeshAgent.remainingDistance < m_navMeshAgent.stoppingDistance)
+    public void OnTargetHpChanged(int newHP)
+    {
+        if (newHP == 0)
         {
-            m_animator.SetBool(m_attackHash, true);
-        }
-        else
-        {
+            currentTarget = null;
             m_animator.SetBool(m_attackHash, false);
         }
     }
