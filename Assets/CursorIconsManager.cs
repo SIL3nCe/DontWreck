@@ -16,8 +16,8 @@ public class CursorIconsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		
-    }
+		Cursor.SetCursor(m_defaultIcon, Vector2.zero, CursorMode.Auto);
+	}
 
     // Update is called once per frame
     void Update()
