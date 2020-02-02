@@ -65,7 +65,7 @@ namespace Objects
             m_pointCount = Mathf.CeilToInt((m_placementAngleMax - m_placementAngleMin) / m_placementStep);
 
             aLocations = new SLocation[m_pointCount];
-            float fCurrentAngle = 0.0f;
+            float fCurrentAngle = m_placementAngleMin;
             for (int pointNum = 0; pointNum < m_pointCount; ++pointNum)
             {
                 aLocations[pointNum] = new SLocation
