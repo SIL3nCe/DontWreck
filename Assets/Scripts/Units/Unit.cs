@@ -30,6 +30,7 @@ public class Unit : MonoBehaviour
 	private int							m_maxHp;
 	private int							m_hp;
 	private bool						m_isSelected;
+	private bool						m_animStopped;
 
 	private void Start()
 	{
@@ -41,6 +42,20 @@ public class Unit : MonoBehaviour
 
 		SetHP(m_maxHp);
 		SetSelected(false);
+
+		m_animStopped = true;
+	}
+
+	private void LateUpdate()
+	{
+		if (IsInteracting())
+		{
+			PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
+		}
+		else
+		{
+			PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+		}
 	}
 
 	/// <summary>
@@ -121,7 +136,10 @@ public class Unit : MonoBehaviour
 
     public void Interact()
     {
-
+		if (!m_animStopped)
+		{
+			m_interactableTarget?.Interact(gameObject);
+		}
     }
 
     public void SetObjective(Vector3 destination, GameObject clickedObject)
@@ -141,11 +159,18 @@ public class Unit : MonoBehaviour
 			{
 				//
 				// Store the interactable
+				Objects.InteractableObject oldTarget = m_interactableTarget;
 				m_interactableTarget = clickedObject.GetComponent<Objects.InteractableObject>();
+
+				if (oldTarget != m_interactableTarget)
+				{
+					PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+				}
 
 				//If we fail to reserve we stay at our current position
 				if (!m_interactableTarget.GetPlacementPoint(gameObject, out destination))
 				{
+					m_interactableTarget = null;
 					destination = m_crewController.transform.position;
 				}
 			}
@@ -206,4 +231,18 @@ public class Unit : MonoBehaviour
     {
         GetComponent<AudioSource>().Stop();
     }
+
+	private void PlayAnimation(Crew.CrewController.AnimationType animationType)
+	{
+		if (animationType == Crew.CrewController.AnimationType.E_NONE)
+		{
+			m_animStopped = true;
+		}
+		else
+		{
+			m_animStopped = false;
+		}
+
+		m_crewController.SetAnimation(animationType);
+	}
 }

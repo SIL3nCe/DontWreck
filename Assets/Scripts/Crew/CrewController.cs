@@ -7,24 +7,37 @@ namespace Crew
 {
     public class CrewController : MonoBehaviour
     {
+        public enum AnimationType
+        {
+            E_INTERACTING,
+            E_NONE
+        }
+
         [Tooltip("[Debug] If true the crew member can be directly moved by mouse click")]
         public bool m_autoAttachToWorldClicker;
 
         private NavMeshAgent    m_navMeshAgent;
         private Animator        m_animator;
 
-        private int m_speedHash;
+        private int             m_speedHash;
+        private int             m_interactHash;
+
+        private AnimationType   m_currentAnimation;
+
 		private void Awake()
 		{
 			//
 			//
 			m_navMeshAgent = GetComponent<NavMeshAgent>();
 			m_animator = GetComponent<Animator>();
+
+            m_currentAnimation = AnimationType.E_NONE;
 		}
 
 		void Start()
         {
             m_speedHash = Animator.StringToHash("Speed");
+            m_interactHash = Animator.StringToHash("Interact");
 
             m_navMeshAgent.updateRotation = false;
 
@@ -69,6 +82,30 @@ namespace Crew
         public float GetStoppingDistance()
         {
             return m_navMeshAgent.stoppingDistance;
+        }
+
+        public void SetAnimation(AnimationType animationType)
+        {
+            if (animationType != m_currentAnimation)
+            {
+                SetAnimation(m_currentAnimation, false);
+            }
+
+            SetAnimation(animationType, true);
+
+            m_currentAnimation = animationType;
+        }
+
+        private void SetAnimation(AnimationType animationType, bool activate)
+        {
+            switch(animationType)
+            {
+                case AnimationType.E_INTERACTING:
+                {
+                    m_animator.SetBool(m_interactHash, activate);
+                }
+                break;
+            }
         }
 
         public void OnDrawGizmos()

@@ -9,6 +9,8 @@ public class WorldClickDestinationSetter : MonoBehaviour
 
     OnClicked m_onClickedCallbacks;
 
+	public AudioClip m_cantGoAudioClip;
+
     void Start()
     {
 
@@ -25,6 +27,13 @@ public class WorldClickDestinationSetter : MonoBehaviour
             {
                 m_onClickedCallbacks?.Invoke(hitInfo.point, hitInfo.collider.gameObject);
             }
+			else
+			{
+				if (!GetComponent<AudioSource>().isPlaying)
+				{
+					GetComponent<AudioSource>().PlayOneShot(m_cantGoAudioClip);
+				}
+			}
         }
     }
 
