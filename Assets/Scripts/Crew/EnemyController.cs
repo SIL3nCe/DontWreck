@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     private Animator m_animator;
 
     private int m_speedHash;
+    private int m_attackHash;
 
     public AudioClip m_deathSound;
 
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
         m_animator = GetComponent<Animator>();
 
         m_speedHash = Animator.StringToHash("Speed");
+        m_attackHash = Animator.StringToHash("Attack");
     }
 
     void Update()
@@ -60,6 +62,15 @@ public class EnemyController : MonoBehaviour
         }
 
         m_animator.SetFloat(m_speedHash, m_navMeshAgent.velocity.normalized.magnitude);
+
+        if (currentTarget != null && m_navMeshAgent.remainingDistance < m_navMeshAgent.stoppingDistance)
+        {
+            m_animator.SetBool(m_attackHash, true);
+        }
+        else
+        {
+            m_animator.SetBool(m_attackHash, false);
+        }
     }
 
     public void PlayDeathSound()
@@ -80,6 +91,6 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
-
+        currentTarget?.Interact(gameObject);
     }
 }
