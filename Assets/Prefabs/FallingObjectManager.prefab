@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab18fb38fb343b649864bb3406918e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 80
-  Timer: 2.36
-  FallingObjectPrefab: {fileID: 6114586158338217519, guid: ef5d4d4de4940994ea807fbccbf68e1b,
+  Radius: 70
+  Timer: 10
+  FallingCannonBall: {fileID: 2985393750002007521, guid: 83dcf96a26898fb44888745ad7fa0af3,
+    type: 3}
+  FallingEnemy: {fileID: 6114586158338217519, guid: ef5d4d4de4940994ea807fbccbf68e1b,
     type: 3}

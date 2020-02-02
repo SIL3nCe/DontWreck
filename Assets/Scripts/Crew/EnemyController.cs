@@ -35,8 +35,8 @@ public class EnemyController : MonoBehaviour
                     // Attack object
                     if (currentTarget.GetPlacementPoint(gameObject, out vLocation))
                     {
-                        GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                        prim2.transform.position = vLocation;
+                        //GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                        //prim2.transform.position = vLocation;
                         m_navMeshAgent.destination = vLocation;
                     }
                 }
