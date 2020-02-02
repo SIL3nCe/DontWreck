@@ -226,6 +226,14 @@ public class Unit : MonoBehaviour
 		return false;
     }
 
+	public void OnDeath()
+	{
+		if (m_interactableTarget != null)
+		{
+			m_interactableTarget.FreePlacement(gameObject);
+		}
+	}
+
     public void PlayDeathSound()
     {
 		AudioSource.PlayClipAtPoint(m_deathSound, Camera.main.transform.position, 0.4f);
