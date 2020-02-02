@@ -81,6 +81,7 @@ public class FallingExplosion : MonoBehaviour
 					else if (charac.GetComponent<EnemyController>() != null)
 					{
 						charac.GetComponent<EnemyController>().PlayDeathSound();
+                        charac.GetComponent<EnemyController>().OnDeath();
 						Destroy(charac);
 					}
 				}

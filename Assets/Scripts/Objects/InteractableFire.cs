@@ -22,6 +22,8 @@ namespace Objects
         private void CrewInteract()
         {
             ModHp(-10);
+            if (m_hp <= 0)
+                Destroy(gameObject);
         }
 	}
 }

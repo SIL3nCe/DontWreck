@@ -30,6 +30,7 @@ namespace Objects
 
         private void CrewInteract()
         {
+            ModHp(10);
         }
 
         private void EnnemyInteract()

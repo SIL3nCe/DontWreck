@@ -70,6 +70,9 @@ public class Unit : MonoBehaviour
 	/// <param name="isSelected"></param>
 	public void SetSelected(bool isSelected)
 	{
+		if (!m_ui)
+			return;
+
 		//
 		// Play a random sound
 		if (!m_isSelected && isSelected)
@@ -127,7 +130,7 @@ public class Unit : MonoBehaviour
 
     public void Attack()
     {
-
+		Interact();
     }
 
     public void Repair()
@@ -137,8 +140,8 @@ public class Unit : MonoBehaviour
 
     public void Extenguish()
     {
-
-    }
+		Interact();
+	}
 
     public void Interact()
     {
@@ -199,7 +202,22 @@ public class Unit : MonoBehaviour
 
 	public void OnTargetHpChanged(int newHP)
 	{
+		if (m_interactableTarget.GetComponent<Objects.InteractableBoatObject>())
+		{
+			if (newHP == m_interactableTarget.m_hpMax)
+			{
+				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+			}
+		}
 
+		if (newHP == 0)
+		{
+			if (m_interactableTarget.GetComponent<Objects.InteractableFire>())
+			{
+				m_crewController.SetAnimation(Crew.CrewController.AnimationType.E_NONE);
+				m_interactableTarget = null;
+			}
+		}
 	}
 
 	public Vector3 GetDestination()
@@ -216,6 +234,14 @@ public class Unit : MonoBehaviour
 
 		return false;
     }
+
+	public void OnDeath()
+	{
+		if (m_interactableTarget != null)
+		{
+			m_interactableTarget.FreePlacement(gameObject);
+		}
+	}
 
     public void PlayDeathSound()
     {
@@ -273,6 +299,21 @@ public class Unit : MonoBehaviour
 			{
 				PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
 			}
+		}
+		else if (m_interactableTarget.GetComponent<Objects.InteractableBoatObject>())
+		{
+			if (m_interactableTarget.m_hp != m_interactableTarget.m_hpMax)
+			{
+				PlayAnimation(Crew.CrewController.AnimationType.E_REPAIRING);
+			}
+			else
+			{
+				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+			}
+		}
+		else if (m_interactableTarget.GetComponent<Objects.InteractableFire>())
+		{
+			PlayAnimation(Crew.CrewController.AnimationType.E_PIPIYING);
 		}
 	}
 }

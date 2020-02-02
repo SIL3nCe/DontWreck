@@ -65,6 +65,11 @@ public class EnemyController : MonoBehaviour
             }
         }
 
+        if (!currentTarget)
+        {
+            m_animator.SetBool(m_attackHash, false);
+        }
+
         m_animator.SetFloat(m_speedHash, m_navMeshAgent.velocity.normalized.magnitude);
     }
 
@@ -74,6 +79,14 @@ public class EnemyController : MonoBehaviour
         {
             currentTarget = null;
             m_animator.SetBool(m_attackHash, false);
+        }
+    }
+
+    public void OnDeath()
+    {
+        if (currentTarget != null)
+        {
+            currentTarget.FreePlacement(gameObject);
         }
     }
 

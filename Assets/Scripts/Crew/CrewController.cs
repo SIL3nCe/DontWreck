@@ -11,6 +11,7 @@ namespace Crew
         {
             E_INTERACTING,
             E_REPAIRING,
+            E_PIPIYING,
             E_NONE
         }
 
@@ -23,6 +24,7 @@ namespace Crew
         private int             m_speedHash;
         private int             m_interactHash;
         private int             m_repairHash;
+        private int             m_pipiHash;
 
         private AnimationType   m_currentAnimation;
 
@@ -41,6 +43,7 @@ namespace Crew
             m_speedHash = Animator.StringToHash("Speed");
             m_interactHash = Animator.StringToHash("Interact");
             m_repairHash = Animator.StringToHash("Repair");
+            m_pipiHash = Animator.StringToHash("Extenguish");
 
             m_navMeshAgent.updateRotation = false;
 
@@ -116,6 +119,12 @@ namespace Crew
                 case AnimationType.E_REPAIRING:
                 {
                     m_animator.SetBool(m_repairHash, activate);
+                }
+                break;
+
+                case AnimationType.E_PIPIYING:
+                {
+                    m_animator.SetBool(m_pipiHash, activate);
                 }
                 break;
             }
