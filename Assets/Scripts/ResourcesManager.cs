@@ -55,6 +55,13 @@ public class ResourcesManager : MonoBehaviour
 		m_inGameHUDGUIManager.SetCoalCount(m_currentCoalCount);
 		m_inGameHUDGUIManager.SetJambonBoursinCount(m_currentJambonBoursinCount);
 		m_inGameHUDGUIManager.SetCrewCount(m_currentCrewCount);
+
+		//
+		// Spawn all the units
+		for (int unit = 0; unit < m_currentCrewCount; ++unit)
+		{
+			GameManager.m_instance.m_unitManager.Invoke("SpawnUnit", unit * 0.4f);
+		}
 	}
 
 	/// <summary>
@@ -107,6 +114,13 @@ public class ResourcesManager : MonoBehaviour
 
 		// Update GUI
 		m_inGameHUDGUIManager.SetCrewCount(m_currentCrewCount);
+
+		//
+		// Spawn all the units
+		for (int unit = 0; unit < count; ++unit)
+		{
+			GameManager.m_instance.m_unitManager.Invoke("SpawnUnit", unit);
+		}
 	}
 
 	/// <summary>
