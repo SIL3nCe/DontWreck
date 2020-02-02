@@ -8,7 +8,7 @@ public class TransitionScene : MonoBehaviour
 {
 
     private GameObject m_Panel;
-    public string TargetScene;
+    [SerializeField]public string TargetScene;
 
     private bool _updateColor;
 

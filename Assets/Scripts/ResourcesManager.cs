@@ -199,5 +199,10 @@ public class ResourcesManager : MonoBehaviour
 	{
 		m_currentEnemiesLifePoints -= count;
 		m_lifePointsGUIManager.SetEnemiesHP(m_currentEnemiesLifePoints, m_startEnemiesLifePoints);
+
+		if (m_currentEnemiesLifePoints <= 0)
+		{
+			GameObject.Find("OutputTransitionScene").GetComponent<BattleBoatOutput>().LoadScene(5000);
+		}
 	}
 }
