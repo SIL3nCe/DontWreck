@@ -79,8 +79,8 @@ namespace Objects
                         bReserved = false,
                     };
 
-                    GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    prim2.transform.position = aLocations[pointNum].vLocation;
+                    //GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    //prim2.transform.position = aLocations[pointNum].vLocation;
 
                     fCurrentAngle += m_placementStep;
 

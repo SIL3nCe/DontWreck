@@ -23,7 +23,8 @@ namespace UI
 
         public void SetDisplayed(bool isDisplayed)
         {
-            m_canvas.enabled = isDisplayed;
+            if (m_canvas)
+                m_canvas.enabled = isDisplayed;
         }
 
         /// <summary>
