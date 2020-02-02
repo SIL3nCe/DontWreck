@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        m_ui = transform.Find("UnitUI").GetComponent<UI.UnitUI>();
+        m_ui = transform.Find("EnemyUI").GetComponent<UI.UnitUI>();
 
         m_navMeshAgent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<Animator>();
