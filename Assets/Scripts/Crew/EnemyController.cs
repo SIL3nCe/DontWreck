@@ -145,11 +145,14 @@ public class EnemyController : MonoBehaviour
 
     public void Attack()
     {
-        Unit crew = CrewTarget.GetComponent<Unit>();
-        if (crew)
+        if (CrewTarget)
         {
-            OnTargetHpChanged(crew.TakeDamages(10));
-            return;
+            Unit crew = CrewTarget.GetComponent<Unit>();
+            if (crew)
+            {
+                OnTargetHpChanged(crew.TakeDamages(10));
+                return;
+            }
         }
 
         ObjectTarget?.Interact(gameObject);

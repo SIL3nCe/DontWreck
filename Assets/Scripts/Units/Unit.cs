@@ -220,6 +220,7 @@ public class Unit : MonoBehaviour
 			else
 			{
 				m_interactableTarget = null;
+				m_enemyTarget = null;
 				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
 
 				if (clickedObject.GetComponent<EnemyController>())
