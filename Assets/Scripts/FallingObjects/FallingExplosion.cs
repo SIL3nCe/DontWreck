@@ -52,7 +52,7 @@ public class FallingExplosion : MonoBehaviour
             // Charac is in range of explosion
             if (Vector3.SqrMagnitude(vOrigin - charac.transform.position) < fSquaredRadius)
             {
-                /* TODO
+				/* TODO
                 //Rigidbody body = charac.AddComponent<Rigidbody>();
                 Rigidbody body = charac.GetComponent<Rigidbody>();
                 if (body)
@@ -70,7 +70,11 @@ public class FallingExplosion : MonoBehaviour
                 //if (body)
                 //    body.AddForce(new Vector3(100.0f, 100.0f, 100.0f));
                 */
-                Destroy(charac);
+				charac.GetComponent<Unit>().PlayDeathSound();
+
+				GameManager.m_instance.m_unitManager.UnpopUnit(charac.GetComponent<Unit>());
+
+				Destroy(charac);
             }
         }
     }

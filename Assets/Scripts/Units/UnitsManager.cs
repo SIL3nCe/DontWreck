@@ -54,6 +54,12 @@ public class UnitsManager : MonoBehaviour
 		return m_units;
 	}
 
+	public void UnpopUnit(Unit unit)
+	{
+		GameManager.m_instance.m_resourcesManager.AddCrew(-1);
+		m_units.Remove(unit);
+	}
+
 	public void SpawnUnit()
 	{
 		//
