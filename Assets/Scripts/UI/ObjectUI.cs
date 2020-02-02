@@ -9,6 +9,10 @@ namespace UI
     {
         public Canvas m_canvas;
         public Image m_lifeBar;
+        public Image m_progressBar;
+
+        public GameObject m_lifeBarContainer;
+        public GameObject m_progressBarContainer;
 
         void Start()
         {
@@ -34,6 +38,18 @@ namespace UI
         public void SetLifeBarFill(float fillAmount)
         {
             m_lifeBar.fillAmount = fillAmount;
+        }
+
+        /// <summary>
+        ///     Set the progression of the progress bar
+        /// </summary>
+        /// 
+        /// <param name="fillAmount">
+        ///     Progression between 1 (100%) and 0(0%)
+        /// </param>
+        public void SetProgressBar(float progression)
+        {
+            m_progressBar.fillAmount = progression;
         }
     }
 }
