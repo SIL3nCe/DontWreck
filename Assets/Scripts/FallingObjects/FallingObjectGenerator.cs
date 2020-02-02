@@ -6,12 +6,33 @@ using UnityEngine;
 public class FallingObjectGenerator : MonoBehaviour
 {
     public float Radius;
+    
+    [Range(5, 20)]
+    public float Timer = 3.0f;
 
-    public GameObject FallingObjectPrefab;
+    public GameObject FallingCannonBall;
+    public GameObject FallingEnemy;
 
-    void Start()
+    private void Start()
     {
-        int remaining = 5;
+        Invoke("Generate", Random.Range(Timer - 1.0f, Timer + 1.0f));
+    }
+
+    public void Generate()
+    {
+        GameObject objectToSpawn = FallingCannonBall;
+
+        GameObject[] enemy;
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemy.Length < 10)
+        {
+            if (Random.Range(0, 100) >= 70)
+            {
+                objectToSpawn = FallingEnemy;
+            }
+        }
+
+        int remaining = Random.Range(2, 5);
         for (int i = 0; i < remaining; ++i)
         {
             NavMeshHit originHit;
@@ -39,14 +60,13 @@ public class FallingObjectGenerator : MonoBehaviour
                         //    Debug.DrawLine(path.corners[j], path.corners[j + 1], Color.white, 500.0f);
                         //}
 
-                        GameObject fallingObject = Instantiate(FallingObjectPrefab, new Vector3(finalPosition.x, finalPosition.y + 40.0f, finalPosition.z), Quaternion.identity);
+                        GameObject fallingObject = Instantiate(objectToSpawn, new Vector3(finalPosition.x, finalPosition.y + 60.0f, finalPosition.z), Quaternion.identity);
                         fallingObject.GetComponent<FallingObject>().vHitLocation = finalPosition;
-
-                       // if (--remaining == 0)
-                       //     break;
                     }
                 }
             }
         }
+
+        Invoke("Generate", Random.Range(Timer - 1.0f, Timer + 1.0f));
     }
 }

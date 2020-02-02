@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: f6d95b96f79a0d5458aa81312ba194d9, type: 2}
 --- !u!1001 &166355388
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ PrefabInstance:
     - target: {fileID: 2741883894918022349, guid: 7baf7aea321db480b9e094f59f64601f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2741883894918022349, guid: 7baf7aea321db480b9e094f59f64601f,
         type: 3}
@@ -498,6 +498,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3767131798281027270, guid: ac5643791d1d66643bfecbeba6a29efb,
+        type: 3}
+      propertyPath: m_repairSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5538d2d5ad91cab4b9cf2cbb038cc6d9, type: 3}
+    - target: {fileID: 3767131798281027270, guid: ac5643791d1d66643bfecbeba6a29efb,
+        type: 3}
+      propertyPath: m_deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: cbb30c35c680e384693192aba676873c, type: 3}
+    - target: {fileID: 3767131798281027270, guid: ac5643791d1d66643bfecbeba6a29efb,
+        type: 3}
+      propertyPath: m_urinationSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5aeb8f51b153ace4e95a88674ab761e3, type: 3}
     - target: {fileID: 7273979611287966822, guid: ac5643791d1d66643bfecbeba6a29efb,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -546,7 +561,7 @@ PrefabInstance:
     - target: {fileID: 7273979611297758084, guid: ac5643791d1d66643bfecbeba6a29efb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7273979611297758084, guid: ac5643791d1d66643bfecbeba6a29efb,
         type: 3}

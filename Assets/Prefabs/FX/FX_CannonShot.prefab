@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 19801364}
   - component: {fileID: 19998858}
   m_Layer: 0
-  m_Name: FX_FlameThrower 1
+  m_Name: FX_CannonShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ ParticleSystem:
   serializedVersion: 6
   lengthInSec: 2
   simulationSpeed: 2
-  stopAction: 0
+  stopAction: 2
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
