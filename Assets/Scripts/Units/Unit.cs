@@ -174,6 +174,11 @@ public class Unit : MonoBehaviour
 					destination = m_crewController.transform.position;
 				}
 			}
+			else
+			{
+				m_interactableTarget = null;
+				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+			}
 		}
 
 		m_crewController.SetDestination(destination);

@@ -63,7 +63,7 @@ namespace UI
         public void SetProgressBar(float progression)
         {
             m_progressBar.fillAmount = progression;
-            m_progressionText.text = (progression * 100).ToString();
+            m_progressionText.text = (progression * 100).ToString() + "%";
         }
 
         public void SetProgressBarDisplayed(bool displayed)
