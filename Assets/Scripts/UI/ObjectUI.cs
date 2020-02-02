@@ -7,12 +7,13 @@ namespace UI
 {
     public class ObjectUI : MonoBehaviour
     {
-        public Canvas m_canvas;
-        public Image m_lifeBar;
-        public Image m_progressBar;
+        public Canvas   m_canvas;
+        public Image    m_lifeBar;
+        public Image    m_progressBar;
+        public Text     m_progressionText;
 
-        public GameObject m_lifeBarContainer;
-        public GameObject m_progressBarContainer;
+        public RectTransform m_lifeBarContainer;
+        public RectTransform m_progressBarContainer;
 
         void Start()
         {
@@ -40,6 +41,18 @@ namespace UI
             m_lifeBar.fillAmount = fillAmount;
         }
 
+        public void SetLifeBarDisplayed(bool displayed)
+        {
+            if (!displayed)
+            {
+                m_lifeBarContainer.transform.localScale = new Vector3();
+            }
+            else
+            {
+                m_lifeBarContainer.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+
         /// <summary>
         ///     Set the progression of the progress bar
         /// </summary>
@@ -50,6 +63,19 @@ namespace UI
         public void SetProgressBar(float progression)
         {
             m_progressBar.fillAmount = progression;
+            m_progressionText.text = (progression * 100).ToString();
+        }
+
+        public void SetProgressBarDisplayed(bool displayed)
+        {
+            if (!displayed)
+            {
+                m_progressBarContainer.transform.localScale = new Vector3();
+            }
+            else
+            {
+                m_progressBarContainer.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 }

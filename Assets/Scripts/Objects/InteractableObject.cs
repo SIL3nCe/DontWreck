@@ -66,30 +66,34 @@ namespace Objects
 			//
             m_pointCount = Mathf.CeilToInt((m_placementAngleMax - m_placementAngleMin) / m_placementStep);
 
-            aLocations = new SLocation[m_pointCount];
-            float fCurrentAngle = m_placementAngleMin;
-            for (int pointNum = 0; pointNum < m_pointCount; ++pointNum)
+            if (m_pointCount != 0)
             {
-                aLocations[pointNum] = new SLocation
+                aLocations = new SLocation[m_pointCount];
+                float fCurrentAngle = m_placementAngleMin;
+                for (int pointNum = 0; pointNum < m_pointCount; ++pointNum)
                 {
-                    vLocation = ComputePoint(fCurrentAngle),
-                    unit = null,
-                    bReserved = false,
-                };
+                    aLocations[pointNum] = new SLocation
+                    {
+                        vLocation = ComputePoint(fCurrentAngle),
+                        unit = null,
+                        bReserved = false,
+                    };
 
-                GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                prim2.transform.position = aLocations[pointNum].vLocation;
+                    GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    prim2.transform.position = aLocations[pointNum].vLocation;
 
-                fCurrentAngle += m_placementStep;
+                    fCurrentAngle += m_placementStep;
 
-                if ((Mathf.Deg2Rad * 360.0f) - m_placementStep < fCurrentAngle)
-                {
-                    m_pointCount = pointNum;
-                    break;
+                    if ((Mathf.Deg2Rad * 360.0f) - m_placementStep < fCurrentAngle)
+                    {
+                        m_pointCount = pointNum;
+                        break;
+                    }
                 }
             }
 
             SetHp(m_hp);
+            m_objectUI.SetProgressBarDisplayed(false);
         }
 
         void Update()
@@ -112,7 +116,7 @@ namespace Objects
 
             m_objectUI.SetLifeBarFill(m_hp / (float)m_hpMax);
 
-            m_objectUI.SetDisplayed(m_hp != m_hpMax);
+            m_objectUI.SetLifeBarDisplayed(m_hp != m_hpMax);
         }
 
         public bool HasFreePlacementPoint(out Vector3 vLocation)
