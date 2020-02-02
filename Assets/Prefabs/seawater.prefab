@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3707273605461335945}
   - component: {fileID: 5632286851293996479}
   - component: {fileID: 2095702592833231174}
+  - component: {fileID: 1417908139802280037}
   m_Layer: 0
-  m_Name: subdivised_plane
+  m_Name: seawater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 372031214693035418}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -1.0117989, y: -0, z: 6.8}
-  m_LocalScale: {x: 179.95143, y: 179.95143, z: 179.95143}
+  m_LocalScale: {x: 179.95143, y: 179.95143, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,3 +80,21 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1417908139802280037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372031214693035418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e62e76dd293fbc44ac1122041bc408c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_bIsActive: 1
+  m_fSpeed: 180
+  m_fCurrentValue: 7
+  m_fDownValue: 3
+  m_fUpValue: 10
+  m_bGoingDown: 1
