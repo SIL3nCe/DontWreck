@@ -70,6 +70,9 @@ public class Unit : MonoBehaviour
 	/// <param name="isSelected"></param>
 	public void SetSelected(bool isSelected)
 	{
+		if (!m_ui)
+			return;
+
 		//
 		// Play a random sound
 		if (!m_isSelected && isSelected)

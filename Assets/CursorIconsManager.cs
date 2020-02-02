@@ -50,7 +50,7 @@ public class CursorIconsManager : MonoBehaviour
 				}
 				else if (hitInfo.collider.GetComponent<Objects.InteractableFire>() != null)
 				{
-					Cursor.SetCursor(m_interactFireIcon, Vector2.zero, CursorMode.Auto);
+					Cursor.SetCursor(m_interactFireIcon, new Vector2(0, 32.0f), CursorMode.Auto);
 				}
 				else
 				{
