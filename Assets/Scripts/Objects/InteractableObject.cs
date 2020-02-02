@@ -25,8 +25,10 @@ namespace Objects
         [Header("HP")]
         public int                  m_hpMax;
 
-        [Tooltip("Begin HP")]
         public int                  m_hp;
+
+        [Header("UI")]
+        public UI.ObjectUI          m_objectUI;
 
         private float               m_placementAngleMin;
         private float               m_placementAngleMax;
@@ -91,6 +93,24 @@ namespace Objects
         void Update()
         {
 			
+        }
+
+        public void SetHp(int hp)
+        {
+            if (hp > m_hpMax)
+            {
+                hp = m_hpMax;
+            }
+            else if(hp < 0)
+            {
+                hp = 0;
+            }
+
+            m_hp = hp;
+
+            m_objectUI.SetLifeBarFill(m_hp / (float)m_hpMax);
+
+            m_objectUI.SetDisplayed(m_hp != m_hpMax);
         }
 
         public bool HasFreePlacementPoint(out Vector3 vLocation)
