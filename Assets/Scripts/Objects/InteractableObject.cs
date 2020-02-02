@@ -35,7 +35,7 @@ namespace Objects
 
         private SLocation[]        aLocations;
 
-        void Start()
+        protected void Start()
         {
 			//
 			//

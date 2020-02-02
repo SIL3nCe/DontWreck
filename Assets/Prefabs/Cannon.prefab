@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c0b70c80b6cd14485dc004f3ccf54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_circleCenterOffset: {x: 0, y: -0.59, z: 0.82}
+  m_circleCenterOffset: {x: -2, y: 0, z: 0}
   m_circleRadius: 3.34
   m_placementAngleMinDeg: 0
   m_placementAngleMaxDeg: 180
