@@ -33,7 +33,6 @@ public class InputTransitionScene : MonoBehaviour
         // Make a note of the time the script started.
         startTime = Time.time;
 
-        //Invoke("ActiveCamera", 10);
     }
 
     private void ActiveCamera()
