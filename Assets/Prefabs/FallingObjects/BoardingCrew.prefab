@@ -570,6 +570,8 @@ MonoBehaviour:
   ExplosionFX: {fileID: 191186, guid: 26faf61ad70f9734a8fd7ba314cac7b7, type: 3}
   ThingToSpawn: {fileID: 7273979611297458084, guid: 2e471391723cd8f4aac1954e4c5c76cb,
     type: 3}
+  ExplosionRadius: 0
+  ExplosionForce: 0
 --- !u!136 &7098629862470903736
 CapsuleCollider:
   m_ObjectHideFlags: 0

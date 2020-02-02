@@ -12,10 +12,10 @@ public class Tide : MonoBehaviour
     public float m_Speed = 100; // time in second to go down/up
     public float m_CurrentValue = 7; // current 
     public float m_DownValue = 3; // value of the down tide, going up when reaching it 
-    public float m_UpValue = 24; // value of the down tide, going up when reaching it
+    public float m_UpValue = 15; // value of the down tide, going up when reaching it
     public bool m_GoingDown = true; // true when tide is going down, false when going up
     public bool m_StopDown = false; // true when tide is going down, false when going up
-    public bool m_StopUp = true; // true when tide is going down, false when going up
+    public bool m_StopUp = false; // true when tide is going down, false when going up
 
     public OnTideDown m_callbackOnTideDown = null;
     public OnTideUp m_callbackOnTideUp = null;

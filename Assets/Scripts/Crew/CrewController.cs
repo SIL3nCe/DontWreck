@@ -55,6 +55,7 @@ namespace Crew
 
         void LateUpdate()
         {
+            // Instant rotate
             if (m_navMeshAgent.velocity.sqrMagnitude > Mathf.Epsilon)
             {
                 Vector3 lookPosition = m_navMeshAgent.velocity;
@@ -66,7 +67,10 @@ namespace Crew
 
         public void SetDestination(Vector3 destination)
         {
-            m_navMeshAgent.destination = destination;
+            if (m_navMeshAgent.enabled)
+            {
+                m_navMeshAgent.destination = destination;
+            }
         }
 
         public Vector3 GetDestination()

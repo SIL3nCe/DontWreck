@@ -10,6 +10,9 @@ public class FallingExplosion : MonoBehaviour
     public GameObject ThingToSpawn;
 	public AudioClip[] m_explosionClips;
 
+    public float ExplosionRadius;
+    public float ExplosionForce;
+
     // Start is called before the first frame update
     public void Begin(Vector3 vOrigin)
     {
@@ -27,6 +30,49 @@ public class FallingExplosion : MonoBehaviour
 
         if (FireFX)
             GenerateFire(vOrigin, 5.0f, 2);
+
+        if (ExplosionForce != 0.0f)
+        {
+            // Get enemy+npcs
+            GameObject[] Crew;
+            Crew = GameObject.FindGameObjectsWithTag("Crew");
+            ApplyImpulseOnCharacs(Crew, vOrigin);
+
+            GameObject[] Enemy;
+            Enemy = GameObject.FindGameObjectsWithTag("Enemy");
+            ApplyImpulseOnCharacs(Enemy, vOrigin);
+        }
+    }
+
+    private void ApplyImpulseOnCharacs(GameObject[] aCharacList, Vector3 vOrigin)
+    {
+        float fSquaredRadius = ExplosionRadius * ExplosionRadius;
+        foreach (GameObject charac in aCharacList)
+        {
+            // Charac is in range of explosion
+            if (Vector3.SqrMagnitude(vOrigin - charac.transform.position) < fSquaredRadius)
+            {
+                /* TODO
+                //Rigidbody body = charac.AddComponent<Rigidbody>();
+                Rigidbody body = charac.GetComponent<Rigidbody>();
+                if (body)
+                {
+                    charac.GetComponent<NavMeshAgent>().enabled = false;
+                    charac.layer = LayerMask.NameToLayer("EjectedCharac");
+                    body.isKinematic = false;
+                    //body.useGravity = false;
+                    body.mass = 5.0f;
+                    //body.velocity = charac.transform.forward * -3.0f;
+                    body.AddForce(new Vector3(100.0f, 100.0f, 100.0f), ForceMode.Impulse);
+                    //body.AddExplosionForce(-3.0f, vOrigin, 10000.0f, 0.0f, ForceMode.Acceleration);
+                }
+                //Rigidbody body = charac.GetComponent<Rigidbody>();
+                //if (body)
+                //    body.AddForce(new Vector3(100.0f, 100.0f, 100.0f));
+                */
+                Destroy(charac);
+            }
+        }
     }
 
     public void GenerateFire(Vector3 vOrigin, float range, int fireNumber)

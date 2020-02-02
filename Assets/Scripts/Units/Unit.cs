@@ -50,12 +50,17 @@ public class Unit : MonoBehaviour
 	{
 		if (IsInteracting())
 		{
+			Quaternion targetRotation = Quaternion.LookRotation(m_interactableTarget.transform.position - transform.position);
+			float fVal = Mathf.Min(2.0f * Time.deltaTime, 1);
+			transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fVal);
+
 			PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
 		}
 		else
 		{
 			PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
 		}
+
 	}
 
 	/// <summary>
