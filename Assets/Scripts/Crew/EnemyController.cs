@@ -77,6 +77,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    public void OnDeath()
+    {
+        if (currentTarget != null)
+        {
+            currentTarget.FreePlacement(gameObject);
+        }
+    }
+
     public void PlayDeathSound()
     {
 		AudioSource.PlayClipAtPoint(m_deathSound, Camera.main.transform.position, 0.4f);
