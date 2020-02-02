@@ -104,6 +104,11 @@ public class Unit : MonoBehaviour
 		SetHP(m_hp - damage);
 	}
 
+    public void Attack()
+    {
+
+    }
+
 	public void SetObjective(Vector3 destination, GameObject clickedObject)
 	{
 		//If an interactable target is already set
