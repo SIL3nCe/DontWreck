@@ -1599,6 +1599,8 @@ GameObject:
   - component: {fileID: 7694426886914808106}
   - component: {fileID: 7694426886917708106}
   - component: {fileID: 7694426886916578058}
+  - component: {fileID: 2001771178}
+  - component: {fileID: 2001771180}
   m_Layer: 0
   m_Name: Steering
   m_TagString: Untagged
@@ -1669,6 +1671,38 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2001771178
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694426886914573642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.561, y: 6.561, z: 2.12291}
+  m_Center: {x: 0, y: 0, z: 1.061455}
+--- !u!114 &2001771180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7694426886914573642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6cc968fa938c1e448f67a5c76907204, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_circleCenterOffset: {x: 0, y: -2.5, z: 1.6}
+  m_circleRadius: 3
+  m_placementAngleMinDeg: 0
+  m_placementAngleMaxDeg: 180
+  m_characterRadius: 3
+  m_hpMax: 100
+  m_hp: 100
 --- !u!1 &7712229102750956800
 GameObject:
   m_ObjectHideFlags: 0
