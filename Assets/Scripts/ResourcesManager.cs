@@ -17,9 +17,13 @@ public class ResourcesManager : MonoBehaviour
 	public int m_startCoalCount;			//< The start number of coal
 	public int m_startJambonBoursinCount;	//< The start number of jambon boursin
 	public int m_startCrewCount;            //< The start number of crew
+	public int m_startPlayerLifePoints;
+	public int m_startEnemiesLifePoints;
+	public int m_enemiesLifePointsIncrements;
 
 	[Header("GUI")]
 	public InGameHUDGUIManager m_inGameHUDGUIManager;
+	public EnnemiesAndPlayerLifeGUIManager m_lifePointsGUIManager;
 
 	//
 	// Private
@@ -28,6 +32,8 @@ public class ResourcesManager : MonoBehaviour
 	private int m_currentCoalCount;
 	private int m_currentJambonBoursinCount;
 	private int m_currentCrewCount;
+	private int m_currentPlayerLifePoints;
+	private int m_currentEnemiesLifePoints;
 
 	public void Start()
 	{
@@ -35,13 +41,6 @@ public class ResourcesManager : MonoBehaviour
 		{
 			m_startWoodCount = ES3.Load<int>("playerWoodCount");
 		}
-
-		//
-		// We ensure the count of every resources is > 0
-		Assert.IsTrue(m_startWoodCount > 0);
-		Assert.IsTrue(m_startCoalCount > 0);
-		Assert.IsTrue(m_startJambonBoursinCount > 0);
-		Assert.IsTrue(m_startCrewCount > 0);
 
 		//
 		// We ensurr the in game HUD GUI manager is not null
@@ -53,6 +52,8 @@ public class ResourcesManager : MonoBehaviour
 		m_currentCoalCount = m_startCoalCount;
 		m_currentJambonBoursinCount = m_startJambonBoursinCount;
 		m_currentCrewCount = m_startCrewCount;
+		m_currentPlayerLifePoints = m_startPlayerLifePoints;
+		m_currentEnemiesLifePoints = m_startEnemiesLifePoints;
 
 		//
 		// Update the GUI according to the current values
@@ -64,6 +65,11 @@ public class ResourcesManager : MonoBehaviour
 		//
 		// Spawn the units with a 5s delay
 		Invoke("SpawnStartUnits", 5f);
+
+		//
+		// Initialize the lifepoints
+		m_lifePointsGUIManager.SetPlayerHP(m_currentPlayerLifePoints, m_startPlayerLifePoints);
+		m_lifePointsGUIManager.SetEnemiesHP(m_currentEnemiesLifePoints, m_startEnemiesLifePoints);
 	}
 
 	public void OnDisable()
@@ -176,5 +182,17 @@ public class ResourcesManager : MonoBehaviour
 	public int GetCrewCount()
 	{
 		return m_currentCrewCount;
+	}
+
+	public void DecreasePlayerLifePoints(int count = 10)
+	{
+		m_currentPlayerLifePoints -= count;
+		m_lifePointsGUIManager.SetPlayerHP(m_currentPlayerLifePoints, m_startPlayerLifePoints);
+	}
+
+	public void DecreaseEnemiesLifePoints(int count = 10)
+	{
+		m_currentEnemiesLifePoints -= count;
+		m_lifePointsGUIManager.SetEnemiesHP(m_currentEnemiesLifePoints, m_startEnemiesLifePoints);
 	}
 }

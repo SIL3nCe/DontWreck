@@ -23,5 +23,5 @@ namespace Objects
         {
             ModHp(-10);
         }
-    }
+	}
 }
