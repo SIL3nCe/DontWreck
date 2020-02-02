@@ -315,5 +315,9 @@ public class Unit : MonoBehaviour
 		{
 			PlayAnimation(Crew.CrewController.AnimationType.E_PIPIYING);
 		}
+		else if (m_interactableTarget.GetComponent<Objects.InteractableResource>())
+		{
+			PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
+		}
 	}
 }
