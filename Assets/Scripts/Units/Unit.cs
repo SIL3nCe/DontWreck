@@ -102,14 +102,29 @@ public class Unit : MonoBehaviour
 	public void Hit(int damage)
 	{
 		SetHP(m_hp - damage);
-	}
+    }
 
     public void Attack()
     {
 
     }
 
-	public void SetObjective(Vector3 destination, GameObject clickedObject)
+    public void Repair()
+    {
+
+    }
+
+    public void Extenguish()
+    {
+
+    }
+
+    public void Interact()
+    {
+
+    }
+
+    public void SetObjective(Vector3 destination, GameObject clickedObject)
 	{
 		//If an interactable target is already set
 		//we inform it that we let our placement position
