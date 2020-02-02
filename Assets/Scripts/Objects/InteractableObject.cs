@@ -101,7 +101,7 @@ namespace Objects
 			
         }
 
-        public void SetHp(int hp)
+        public virtual void SetHp(int hp)
         {
             if (hp > m_hpMax)
             {
@@ -117,6 +117,11 @@ namespace Objects
             m_objectUI.SetLifeBarFill(m_hp / (float)m_hpMax);
 
             m_objectUI.SetLifeBarDisplayed(m_hp != m_hpMax);
+        }
+
+        public void ModHp(int modification)
+        {
+            SetHp(m_hp + modification);
         }
 
         public bool HasFreePlacementPoint(out Vector3 vLocation)

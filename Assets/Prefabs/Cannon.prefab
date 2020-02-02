@@ -67,6 +67,7 @@ MonoBehaviour:
   m_hpMax: 100
   m_hp: 100
   m_objectUI: {fileID: 2446910937028210117}
+  m_maxCharge: 100
 --- !u!1001 &1655479141191533466
 PrefabInstance:
   m_ObjectHideFlags: 0
