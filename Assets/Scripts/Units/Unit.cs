@@ -202,7 +202,13 @@ public class Unit : MonoBehaviour
 
 	public void OnTargetHpChanged(int newHP)
 	{
-
+		if (m_interactableTarget.GetComponent<Objects.InteractableBoatObject>())
+		{
+			if (newHP == m_interactableTarget.m_hpMax)
+			{
+				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+			}
+		}
 	}
 
 	public Vector3 GetDestination()
