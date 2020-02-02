@@ -6,6 +6,13 @@ namespace Objects
 {
     public class InteractableObject : MonoBehaviour
     {
+        private struct SLocation
+        {
+            public GameObject unit;
+            public Vector3 vLocation;
+            public bool bReserved;
+        }
+
         [Header("Circle")]
         public Vector3  m_circleCenterOffset;
         public float    m_circleRadius;
@@ -26,7 +33,7 @@ namespace Objects
         private float               m_placementStep;
         private int                 m_pointCount;
 
-        private GameObject[]        m_reservedPoints;
+        private SLocation[]        aLocations;
 
         void Start()
         {
@@ -56,7 +63,20 @@ namespace Objects
 			//
 			//
             m_pointCount = Mathf.CeilToInt((m_placementAngleMax - m_placementAngleMin) / m_placementStep);
-            m_reservedPoints = new GameObject[m_pointCount];
+
+            aLocations = new SLocation[m_pointCount];
+            float fCurrentAngle = 0.0f;
+            for (int pointNum = 0; pointNum < m_pointCount; ++pointNum)
+            {
+                aLocations[pointNum] = new SLocation
+                {
+                    vLocation = ComputePoint(fCurrentAngle),
+                    unit = null,
+                    bReserved = false,
+                };
+
+                fCurrentAngle += m_placementStep;
+            }
         }
 
         void Update()
@@ -64,34 +84,33 @@ namespace Objects
 			
         }
 
-        public bool HasFreePlacementPoint()
+        public bool HasFreePlacementPoint(out Vector3 vLocation)
         {
-            foreach(GameObject unit in m_reservedPoints)
+            foreach(SLocation location in aLocations)
             {
-                if (unit == null)
+                if (!location.bReserved)
                 {
+                    vLocation = location.vLocation;
                     return true;
                 }
             }
 
+            vLocation = new Vector3();
             return false;
         }
 
         public bool GetPlacementPoint(GameObject unit, out Vector3 placementPoint)
         {
-            float currentAngle = m_placementAngleMin;
-
             for (int pointNum = 0; pointNum < m_pointCount; ++pointNum)
             {
-                if (m_reservedPoints[pointNum] == null)
+                if (!aLocations[pointNum].bReserved)
                 {
-                    placementPoint = ComputePoint(currentAngle);
-                    m_reservedPoints[pointNum] = unit;
+                    placementPoint = aLocations[pointNum].vLocation;
+                    aLocations[pointNum].unit = unit;
+                    aLocations[pointNum].bReserved = true;
 
                     return true;
                 }
-
-                currentAngle += m_placementStep;
             }
 
             placementPoint = new Vector3();
@@ -100,11 +119,12 @@ namespace Objects
 
         public void FreePlacement(GameObject unit)
         {
-            for (int i = 0; i < m_reservedPoints.Length; ++i)
+            for (int pointNum = 0; pointNum < m_pointCount; ++pointNum)
             {
-                if (m_reservedPoints[i] == unit)
+                if (aLocations[pointNum].unit == unit)
                 {
-                    m_reservedPoints[i] = null;
+                    aLocations[pointNum].unit = null;
+                    aLocations[pointNum].bReserved = false;
                     return;
                 }
             }
@@ -118,12 +138,14 @@ namespace Objects
         private void FindStep()
         {
             float currentAngle = m_placementAngleMin;
+            
+            Vector3 vMinAngle = ComputePoint(m_placementAngleMin);
 
             while (Mathf.Abs(m_placementAngleMax - currentAngle) > 0.01f)
             {
                 currentAngle += 0.01f;
 
-                float distance = Vector3.Distance(ComputePoint(currentAngle), ComputePoint(m_placementAngleMin));
+                float distance = Vector3.Distance(ComputePoint(currentAngle), vMinAngle);
 
                 if (distance >= m_characterRadius / 2.0f)
                 {

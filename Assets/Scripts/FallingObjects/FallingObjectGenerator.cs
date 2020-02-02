@@ -11,7 +11,7 @@ public class FallingObjectGenerator : MonoBehaviour
 
     void Start()
     {
-        int remaining = 0;
+        int remaining = 5;
         for (int i = 0; i < remaining; ++i)
         {
             NavMeshHit originHit;

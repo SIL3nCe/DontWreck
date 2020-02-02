@@ -11,24 +11,27 @@ public class InteractableObjectManager : MonoBehaviour
     {
         Objects.InteractableObject nearestObject = null;
         float fCurrDist = float.MaxValue;
+        Vector3 debug = new Vector3();
         foreach (Objects.InteractableObject interactableObject in InteractableObjectList)
         {
-            if (interactableObject.HasFreePlacementPoint())
+            Vector3 vPointLocation;
+            if (interactableObject.HasFreePlacementPoint(out vPointLocation))
             {
-                Vector3 vObjectLocation = interactableObject.transform.position;
-
                 NavMeshPath navPath = new NavMeshPath();
-                NavMesh.CalculatePath(vLocation, vObjectLocation, NavMesh.AllAreas, navPath);
+                NavMesh.CalculatePath(vLocation, vPointLocation, NavMesh.AllAreas, navPath);
 
                 float fRes = GetPathLength(navPath);
                 if (fRes < fCurrDist)
                 {
+                    debug = vLocation;
                     nearestObject = interactableObject;
                     fCurrDist = fRes;
                 }
             }
         }
 
+        //GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //prim2.transform.position = debug;
         return nearestObject;
     }
 
