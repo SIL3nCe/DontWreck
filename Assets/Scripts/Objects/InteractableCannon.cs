@@ -9,6 +9,10 @@ namespace Objects
         [Header("Cannon Loading")]
         public int  m_maxCharge;
 
+        [Header("Cannon objects")]
+        public GameObject m_cannonFullHealth;
+        public GameObject m_cannonDamaged;
+
         private int m_charge = 0;
         
         new protected void Start()
@@ -36,6 +40,17 @@ namespace Objects
         public override void SetHp(int hp)
         {
             base.SetHp(hp);
+
+            if (hp < m_hpMax)
+            {
+                m_cannonFullHealth.SetActive(false);
+                m_cannonDamaged.SetActive(true);
+            }
+            else
+            {
+                m_cannonFullHealth.SetActive(true);
+                m_cannonDamaged.SetActive(false);
+            }
         }
 
         private void CrewInteract()
