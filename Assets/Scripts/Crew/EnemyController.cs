@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
 
     private int m_speedHash;
 
+    public AudioClip m_deathSound;
+
     private void Start()
     {
         m_navMeshAgent = GetComponent<NavMeshAgent>();
@@ -58,5 +60,26 @@ public class EnemyController : MonoBehaviour
         }
 
         m_animator.SetFloat(m_speedHash, m_navMeshAgent.velocity.normalized.magnitude);
+    }
+
+    public void PlayDeathSound()
+    {
+        GetComponent<AudioSource>().clip = m_deathSound;
+        GetComponent<AudioSource>().Play();
+    }
+
+    public void StopSounds()
+    {
+        GetComponent<AudioSource>().Stop();
+    }
+
+    public void Damage()
+    {
+
+    }
+
+    public void Attack()
+    {
+
     }
 }

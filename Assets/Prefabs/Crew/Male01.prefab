@@ -5231,6 +5231,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 266b3c5a4fdd34041ac1aa8378907ebb, type: 3}
   - {fileID: 8300000, guid: b6d1ed71205fbdf46a8709a6193561ec, type: 3}
   - {fileID: 8300000, guid: b6d1ed71205fbdf46a8709a6193561ec, type: 3}
+  m_deathSound: {fileID: 8300000, guid: cbb30c35c680e384693192aba676873c, type: 3}
+  m_repairSound: {fileID: 8300000, guid: 5538d2d5ad91cab4b9cf2cbb038cc6d9, type: 3}
+  m_urinationSound: {fileID: 8300000, guid: 5aeb8f51b153ace4e95a88674ab761e3, type: 3}
 --- !u!136 &984176648228248518
 CapsuleCollider:
   m_ObjectHideFlags: 0
