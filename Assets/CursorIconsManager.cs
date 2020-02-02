@@ -1,0 +1,64 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class CursorIconsManager : MonoBehaviour
+{
+	[Header("Icons")]
+	public Texture2D m_defaultIcon;
+	public Texture2D m_interactWoodIcon;
+	public Texture2D m_interactCoalIcon;
+	public Texture2D m_interactFightIcon;
+	public Texture2D m_interactRepairIcon;
+	public Texture2D m_interactCannonIcon;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+		
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+		RaycastHit hitInfo;
+		if (Physics.Raycast(ray, out hitInfo))
+		{
+			if (hitInfo.collider.GetComponent<Objects.InteractableObject>() != null)
+			{
+				if (hitInfo.collider.GetComponent<Objects.InteractableCannon>() != null)
+				{
+					//
+					// Cannon
+					if (hitInfo.collider.GetComponent<Objects.InteractableCannon>().m_hp > 0)
+					{
+						// TODO: Canon icon
+						Cursor.SetCursor(m_interactCannonIcon, Vector2.zero, CursorMode.Auto);
+					}
+					else
+					{
+						Cursor.SetCursor(m_interactRepairIcon, Vector2.zero, CursorMode.Auto);
+					}
+				}
+				else if (hitInfo.collider.GetComponent<EnemyController>() != null)
+				{
+					Cursor.SetCursor(m_interactFightIcon, Vector2.zero, CursorMode.Auto);
+				}
+				else
+				{
+					Cursor.SetCursor(m_defaultIcon, Vector2.zero, CursorMode.Auto);
+				}
+			}
+			else
+			{
+				Cursor.SetCursor(m_defaultIcon, Vector2.zero, CursorMode.Auto);
+			}
+		}
+		else
+		{
+			Cursor.SetCursor(m_defaultIcon, Vector2.zero, CursorMode.Auto);
+		}
+    }
+}
