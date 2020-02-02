@@ -43,6 +43,18 @@ public class Unit : MonoBehaviour
 		SetSelected(false);
 	}
 
+	private void LateUpdate()
+	{
+		if (IsInteracting())
+		{
+			m_crewController.SetAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
+		}
+		else
+		{
+			m_crewController.SetAnimation(Crew.CrewController.AnimationType.E_NONE);
+		}
+	}
+
 	/// <summary>
 	/// Set the selected status of this unit
 	/// </summary>
@@ -121,7 +133,7 @@ public class Unit : MonoBehaviour
 
     public void Interact()
     {
-
+		m_interactableTarget?.Interact(gameObject);
     }
 
     public void SetObjective(Vector3 destination, GameObject clickedObject)
@@ -141,11 +153,18 @@ public class Unit : MonoBehaviour
 			{
 				//
 				// Store the interactable
+				Objects.InteractableObject oldTarget = m_interactableTarget;
 				m_interactableTarget = clickedObject.GetComponent<Objects.InteractableObject>();
+
+				if (oldTarget != m_interactableTarget)
+				{
+					m_crewController.SetAnimation(Crew.CrewController.AnimationType.E_NONE);
+				}
 
 				//If we fail to reserve we stay at our current position
 				if (!m_interactableTarget.GetPlacementPoint(gameObject, out destination))
 				{
+					m_interactableTarget = null;
 					destination = m_crewController.transform.position;
 				}
 			}

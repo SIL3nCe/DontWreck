@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5676136329516544229}
   - component: {fileID: 1461543006879517826}
   - component: {fileID: 7375701290412083144}
+  - component: {fileID: 4910345210754566409}
   m_Layer: 5
   m_Name: Progression
   m_TagString: Untagged
@@ -77,6 +78,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0%
+--- !u!114 &4910345210754566409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563023628224570416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f6a9729ae9d734fb4c6f4b398dd402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1701224498278602944
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +247,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &989220453174859284
