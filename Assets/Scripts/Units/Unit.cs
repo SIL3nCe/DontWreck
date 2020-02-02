@@ -160,7 +160,12 @@ public class Unit : MonoBehaviour
     {
 		if (!m_animStopped)
 		{
-			//m_enemyTarget.h
+			if(m_enemyTarget.TakeDamage(10) <= 0)
+			{
+				m_enemyTarget = null;
+				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+				m_crewController.SetDestination(m_crewController.transform.position);
+			}
 		}
     }
 
