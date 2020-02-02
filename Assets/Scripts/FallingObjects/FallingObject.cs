@@ -9,8 +9,8 @@ public class FallingObject : MonoBehaviour
 
     void Start()
     {
-        GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        prim2.transform.position = vHitLocation;
+        //GameObject prim2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //prim2.transform.position = vHitLocation;
      }
 
     void Update()
