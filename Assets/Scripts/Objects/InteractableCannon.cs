@@ -114,7 +114,7 @@ namespace Objects
 
 			m_shotPostFX.Play();
 
-			GameManager.m_instance.m_resourcesManager.DecreaseEnemiesLifePoints(5);
+			GameManager.m_instance.m_resourcesManager.DecreaseEnemiesLifePoints(2);
 		}
     }
 }

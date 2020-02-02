@@ -76,7 +76,7 @@ public class ResourcesManager : MonoBehaviour
 	{
 		//
 		//
-		ES3.Save<int>("playerWoodCount", m_currentWoodCount);
+		//ES3.Save<int>("playerWoodCount", m_currentWoodCount);
 	}
 
 	public void SpawnStartUnits()

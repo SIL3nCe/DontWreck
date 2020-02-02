@@ -81,4 +81,25 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+	public void OnGUI()
+	{
+		GUILayout.BeginArea(new Rect((Screen.width / 2) - 50, (Screen.height / 2), 100, 100));
+
+		if (GUILayout.Button("Play"))
+		{
+			PlayAction();
+		}
+
+		if (GUILayout.Button("Credits"))
+		{
+			CreditsAction();
+		}
+
+		if (GUILayout.Button("Quit"))
+		{
+			QuitAction();
+		}
+		GUILayout.EndArea();
+	}
+
 }

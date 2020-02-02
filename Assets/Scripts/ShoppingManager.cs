@@ -89,4 +89,8 @@ public class ShoppingManager : MonoBehaviour
     {
 
     }
+
+	public void OnGUI()
+	{
+	}
 }
