@@ -62,16 +62,19 @@ public class UnitsManager : MonoBehaviour
 		bool warped = newUnit.GetComponent<NavMeshAgent>().Warp(m_spawnPoint.position);
 
 		//
+		//
+		if (!newUnit.GetComponent<AudioSource>().isPlaying)
+		{
+			newUnit.GetComponent<AudioSource>().PlayOneShot(m_unitSpawnAudioClip);
+		}
+
+		//
 		// Set the destination of the unit
 		newUnit.GetComponent<Unit>().SetObjective(m_spawnStartDestination.position + new Vector3(Random.Range(-8f, 8f), 0f, Random.Range(-8f, 8f)), null);
 
 		//
 		// Add the unit to the array of units
 		m_units.Add(newUnit.GetComponent<Unit>());
-
-		//
-		//
-		newUnit.GetComponent<AudioSource>().PlayOneShot(m_unitSpawnAudioClip);
 	}
 
 	public void MoveSelectedUnitsToPosition(Vector3 position, GameObject clickedObject)

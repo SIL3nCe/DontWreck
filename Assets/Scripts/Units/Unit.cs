@@ -13,6 +13,10 @@ public class Unit : MonoBehaviour
 {
 	public Crew.CrewController			m_crewController;
 
+	[Header("Sounds")]
+	public AudioClip[] m_setDestinationSounds;
+	public AudioClip[] m_selectedSounds;
+
 	//
 	// Private
 	//
@@ -42,6 +46,16 @@ public class Unit : MonoBehaviour
 	/// <param name="isSelected"></param>
 	public void SetSelected(bool isSelected)
 	{
+		//
+		// Play a random sound
+		if (!m_isSelected && isSelected)
+		{
+			if (!GetComponent<AudioSource>().isPlaying)
+			{
+				GetComponent<AudioSource>().PlayOneShot(m_selectedSounds[Random.Range(0, m_selectedSounds.Length)]);
+			}
+		}
+
 		m_isSelected = isSelected;
 
 		m_ui.SetDisplayed(isSelected);
@@ -115,6 +129,13 @@ public class Unit : MonoBehaviour
 		}
 
 		m_crewController.SetDestination(destination);
+
+		//
+		// Play a sound
+		if (!GetComponent<AudioSource>().isPlaying)
+		{
+			GetComponent<AudioSource>().PlayOneShot(m_setDestinationSounds[Random.Range(0, m_setDestinationSounds.Length)]);
+		}		
 	}
 
 	public Vector3 GetDestination()

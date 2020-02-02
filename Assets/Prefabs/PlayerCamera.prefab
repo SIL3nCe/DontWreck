@@ -225,4 +225,4 @@ MonoBehaviour:
   Target: {fileID: 0}
   RestrictedArea: {fileID: 0}
   MaxZoom: 58
-  MinZoom: 36
+  MinZoom: 25

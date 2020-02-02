@@ -5243,6 +5243,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_crewController: {fileID: 8028745138292557538}
+  m_setDestinationSounds:
+  - {fileID: 8300000, guid: 8793a07235f53dc4283bcfbff8abb096, type: 3}
+  - {fileID: 8300000, guid: 5349b2ee1f22d224b8561ff7b5010c98, type: 3}
+  - {fileID: 8300000, guid: 320085aba087b604485d9a885da2b48c, type: 3}
+  - {fileID: 8300000, guid: ed8aeea28156f984ebb2a79da9ed2c93, type: 3}
+  m_selectedSounds:
+  - {fileID: 8300000, guid: b6d1ed71205fbdf46a8709a6193561ec, type: 3}
+  - {fileID: 8300000, guid: b11bff397eade644d879e9671ac88454, type: 3}
+  - {fileID: 8300000, guid: 79dd7b3374d552f40a710412bbecacf1, type: 3}
+  - {fileID: 8300000, guid: 266b3c5a4fdd34041ac1aa8378907ebb, type: 3}
 --- !u!136 &984176648228248518
 CapsuleCollider:
   m_ObjectHideFlags: 0
