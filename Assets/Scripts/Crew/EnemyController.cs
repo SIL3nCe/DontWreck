@@ -53,11 +53,14 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            if (m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance)
+            if (m_navMeshAgent.enabled)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
-                float fVal = Mathf.Min(2.0f * Time.deltaTime, 1);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fVal);
+                if (m_navMeshAgent.remainingDistance <= m_navMeshAgent.stoppingDistance)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(currentTarget.transform.position - transform.position);
+                    float fVal = Mathf.Min(2.0f * Time.deltaTime, 1);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fVal);
+                }
             }
         }
 

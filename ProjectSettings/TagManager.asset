@@ -9,6 +9,7 @@ TagManager:
   - RestrictedArea
   - CreditMenu
   - Enemy
+  - Crew
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - 
   - CameraRestrictedArea
-  - 
+  - EjectedCharac
   - 
   - 
   - 
