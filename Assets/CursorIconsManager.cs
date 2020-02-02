@@ -12,6 +12,7 @@ public class CursorIconsManager : MonoBehaviour
 	public Texture2D m_interactFightIcon;
 	public Texture2D m_interactRepairIcon;
 	public Texture2D m_interactCannonIcon;
+	public Texture2D m_interactFireIcon;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,8 @@ public class CursorIconsManager : MonoBehaviour
 				{
 					//
 					// Cannon
-					if (hitInfo.collider.GetComponent<Objects.InteractableCannon>().m_hp > 0)
+					Objects.InteractableCannon cannon = hitInfo.collider.GetComponent<Objects.InteractableCannon>();
+					if (cannon.m_hp == cannon.m_hpMax)
 					{
 						// TODO: Canon icon
 						Cursor.SetCursor(m_interactCannonIcon, Vector2.zero, CursorMode.Auto);
@@ -45,6 +47,10 @@ public class CursorIconsManager : MonoBehaviour
 				else if (hitInfo.collider.GetComponent<EnemyController>() != null)
 				{
 					Cursor.SetCursor(m_interactFightIcon, Vector2.zero, CursorMode.Auto);
+				}
+				else if (hitInfo.collider.GetComponent<Objects.InteractableFire>() != null)
+				{
+					Cursor.SetCursor(m_interactFireIcon, Vector2.zero, CursorMode.Auto);
 				}
 				else
 				{
