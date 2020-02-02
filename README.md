@@ -1,5 +1,4 @@
-# GGJ2020-JambonBoursin
-New start.
+# Don't Wreck
 
 Control your sailors to win the combat. Gather resources to repair your boat and cannons.
 
