@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class InputTransitionScene : MonoBehaviour
 {
 
     private GameObject m_Panel;
     private bool _updatePanel;
+
+    public GameObject FirstCameraPrefab;
 
     float duration = 5.0f;
     private float startTime;
@@ -25,6 +28,13 @@ public class InputTransitionScene : MonoBehaviour
         _updatePanel = true;
         // Make a note of the time the script started.
         startTime = Time.time;
+
+        Invoke("ActiveCamera", 2);
+    }
+
+    private void ActiveCamera()
+    {
+        FirstCameraPrefab.gameObject.SetActive(true);
     }
 
 
