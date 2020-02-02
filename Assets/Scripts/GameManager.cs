@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 	public WorldClickDestinationSetter m_worldClickDestinationSetter;
 	public UnitSelector m_unitSelector;
 	public UnitsManager m_unitManager;
+	public ResourcesManager m_resourcesManager;
 
 	//
 	// Singleton
@@ -37,5 +38,9 @@ public class GameManager : MonoBehaviour
 		//
 		// Ensure the unit manager is not null
 		Assert.AreNotEqual(null, m_unitManager);
+
+		//
+		// Ensure the resources manager is not null
+		Assert.AreNotEqual(null, m_resourcesManager);
     }
 }

@@ -619,6 +619,7 @@ MonoBehaviour:
   m_worldClickDestinationSetter: {fileID: 3694560700328044336}
   m_unitSelector: {fileID: 2514700623092428753}
   m_unitManager: {fileID: 5080207016450052905}
+  m_resourcesManager: {fileID: 364840308}
 --- !u!1 &4337646048539889685
 GameObject:
   m_ObjectHideFlags: 0
