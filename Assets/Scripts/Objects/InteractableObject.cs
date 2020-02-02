@@ -109,6 +109,8 @@ namespace Objects
             m_hp = hp;
 
             m_objectUI.SetLifeBarFill(m_hp / (float)m_hpMax);
+
+            m_objectUI.SetDisplayed(m_hp != m_hpMax);
         }
 
         public bool HasFreePlacementPoint(out Vector3 vLocation)
