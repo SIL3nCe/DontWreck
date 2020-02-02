@@ -13,7 +13,15 @@ namespace Objects
         public GameObject m_cannonFullHealth;
         public GameObject m_cannonDamaged;
 
-        private int m_charge = 0;
+		[Header("Post Effect")]
+		public ParticleSystem m_shotPostFX;
+
+		[Header("Sound")]
+		public AudioClip m_audioClipDestroy;
+		public AudioClip[] m_audioClipsFire;
+		private bool dirtyFirstPlaySound = true;
+
+		private int m_charge = 0;
         
         new protected void Start()
         {
@@ -39,6 +47,7 @@ namespace Objects
 
         public override void SetHp(int hp)
         {
+
             base.SetHp(hp);
 
             if (hp < m_hpMax)
@@ -50,8 +59,16 @@ namespace Objects
             {
                 m_cannonFullHealth.SetActive(true);
                 m_cannonDamaged.SetActive(false);
-            }
-        }
+				
+				if (!dirtyFirstPlaySound)
+				{
+					GetComponent<AudioSource>().PlayOneShot(m_audioClipDestroy);
+				}
+			}
+
+			dirtyFirstPlaySound = false;
+
+		}
 
         private void CrewInteract()
         {
@@ -85,7 +102,12 @@ namespace Objects
 
         private void Fire()
         {
+			if (!GetComponent<AudioSource>().isPlaying)
+			{
+				GetComponent<AudioSource>().PlayOneShot(m_audioClipsFire[Random.Range(0, m_audioClipsFire.Length)]);
+			}
 
-        }
+			m_shotPostFX.Play();
+		}
     }
 }

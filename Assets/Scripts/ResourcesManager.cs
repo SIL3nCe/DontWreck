@@ -31,6 +31,11 @@ public class ResourcesManager : MonoBehaviour
 
 	public void Start()
 	{
+		if (ES3.KeyExists("playerWoodCount"))
+		{
+			m_startWoodCount = ES3.Load<int>("playerWoodCount");
+		}
+
 		//
 		// We ensure the count of every resources is > 0
 		Assert.IsTrue(m_startWoodCount > 0);
@@ -59,6 +64,13 @@ public class ResourcesManager : MonoBehaviour
 		//
 		// Spawn the units with a 5s delay
 		Invoke("SpawnStartUnits", 5f);
+	}
+
+	public void OnDisable()
+	{
+		//
+		//
+		ES3.Save<int>("playerWoodCount", m_currentWoodCount);
 	}
 
 	public void SpawnStartUnits()

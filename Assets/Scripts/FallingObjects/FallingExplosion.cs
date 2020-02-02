@@ -8,11 +8,19 @@ public class FallingExplosion : MonoBehaviour
     public GameObject FireFX;
     public GameObject ExplosionFX;
     public GameObject ThingToSpawn;
+	public AudioClip[] m_explosionClips;
 
     // Start is called before the first frame update
     public void Begin(Vector3 vOrigin)
     {
-        Instantiate(ExplosionFX, vOrigin, Quaternion.identity);
+		//
+		//
+		if (m_explosionClips.Length > 0)
+		{
+			AudioSource.PlayClipAtPoint(m_explosionClips[Random.Range(0, m_explosionClips.Length)], Camera.main.transform.position, 0.6f);
+		}
+
+		Instantiate(ExplosionFX, vOrigin, Quaternion.identity);
 
         if (ThingToSpawn)
             Instantiate(ThingToSpawn, vOrigin, Quaternion.identity);
@@ -23,6 +31,7 @@ public class FallingExplosion : MonoBehaviour
 
     public void GenerateFire(Vector3 vOrigin, float range, int fireNumber)
     {
+
         int remaining = fireNumber;
         for (int i = 0; i < 50; ++i)
         {
