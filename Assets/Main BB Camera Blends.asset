@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Main BB Camera Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: CM vcam1
+  - m_From: CM vcam2
     m_To: PlayerCamera
     m_Blend:
       m_Style: 1
