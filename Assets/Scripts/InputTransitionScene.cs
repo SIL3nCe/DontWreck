@@ -44,11 +44,13 @@ public class InputTransitionScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(DollyCart.m_Position);
-        if( DollyCart.m_Position >= 1167.00f && ! _dollyPositioned)
+        if( DollyCart && FirstCameraPrefab )
         {
-            ActiveCamera();
-            _dollyPositioned = true;
+            if( DollyCart.m_Position >= 1167.00f && ! _dollyPositioned)
+            {
+                ActiveCamera();
+                _dollyPositioned = true;
+            }
         }
 
         if (_updatePanel)
