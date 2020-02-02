@@ -26,6 +26,7 @@ public class Unit : MonoBehaviour
 	private UI.UnitUI					m_ui;
 
 	private Objects.InteractableObject	m_interactableTarget;
+	private EnemyController				m_enemyTarget;
 
 	private int							m_maxHp;
 	private int							m_hp;
@@ -48,6 +49,11 @@ public class Unit : MonoBehaviour
 
 	private void LateUpdate()
 	{
+		if (m_enemyTarget)
+		{
+			m_crewController.SetDestination(m_enemyTarget.transform.position);
+		}
+
 		if (IsInteracting())
 		{
 			Quaternion targetRotation = Quaternion.LookRotation(m_interactableTarget.transform.position - transform.position);
@@ -57,11 +63,15 @@ public class Unit : MonoBehaviour
 
 			PlayRightAnimation();
 		}
+		else if(IsAttacking())
+		{
+			m_crewController.SetDestination(transform.position);
+			PlayAnimation(Crew.CrewController.AnimationType.E_ATTACKING);
+		}
 		else
 		{
 			PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
 		}
-
 	}
 
 	/// <summary>
@@ -130,7 +140,10 @@ public class Unit : MonoBehaviour
 
     public void Attack()
     {
-		Interact();
+		if (!m_animStopped)
+		{
+			//m_enemyTarget.h
+		}
     }
 
     public void Repair()
@@ -166,6 +179,12 @@ public class Unit : MonoBehaviour
 		{
 			if (clickedObject.GetComponent<Objects.InteractableObject>() != null)
 			{
+				if (m_enemyTarget !=null)
+				{
+					PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+					m_enemyTarget = null;
+				}
+
 				//
 				// Store the interactable
 				Objects.InteractableObject oldTarget = m_interactableTarget;
@@ -187,6 +206,11 @@ public class Unit : MonoBehaviour
 			{
 				m_interactableTarget = null;
 				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+
+				if (clickedObject.GetComponent<EnemyController>())
+				{
+					m_enemyTarget = clickedObject.GetComponent<EnemyController>();
+				}
 			}
 		}
 
@@ -234,6 +258,16 @@ public class Unit : MonoBehaviour
 
 		return false;
     }
+
+	public bool IsAttacking()
+	{
+		if (m_enemyTarget != null)
+		{
+			return m_crewController.GetDistanceToDestination() <= m_crewController.GetStoppingDistance() + 1.5f;
+		}
+
+		return false;
+	}
 
 	public void OnDeath()
 	{
