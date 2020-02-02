@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8917855809705379801}
   - component: {fileID: 3380129429343067675}
-  - component: {fileID: 421955469716530449}
+  - component: {fileID: 7261869054995328810}
   m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.342353, y: 4.6181974, z: 6.217292}
   m_Center: {x: -0.11525202, y: 1.8090987, z: -1.6366897}
---- !u!114 &421955469716530449
+--- !u!114 &7261869054995328810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,8 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c0b70c80b6cd14485dc004f3ccf54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_circleCenterOffset: {x: 0, y: -0.59, z: 0.82}
-  m_circleRadius: 3.34
+  m_circleCenterOffset: {x: 0, y: 0, z: 0}
+  m_circleRadius: 4
   m_placementAngleMinDeg: 0
   m_placementAngleMaxDeg: 180
   m_characterRadius: 4
