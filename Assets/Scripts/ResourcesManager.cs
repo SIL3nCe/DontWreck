@@ -37,10 +37,10 @@ public class ResourcesManager : MonoBehaviour
 
 	public void Start()
 	{
-		if (ES3.KeyExists("playerWoodCount"))
-		{
-			m_startWoodCount = ES3.Load<int>("playerWoodCount");
-		}
+		//if (ES3.KeyExists("playerWoodCount"))
+		//{
+		//	m_startWoodCount = ES3.Load<int>("playerWoodCount");
+		//}
 
 		//
 		// We ensurr the in game HUD GUI manager is not null
@@ -145,6 +145,11 @@ public class ResourcesManager : MonoBehaviour
 		for (int unit = 0; unit < count; ++unit)
 		{
 			GameManager.m_instance.m_unitManager.Invoke("SpawnUnit", unit);
+		}
+
+		if (m_currentCoalCount <= 0)
+		{
+			Application.Quit();
 		}
 	}
 

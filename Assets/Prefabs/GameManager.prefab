@@ -833,10 +833,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e6208cfe033eb42889d951c3c8b7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_startWoodCount: 400
+  m_startWoodCount: 100
   m_startCoalCount: 100
   m_startJambonBoursinCount: 50
-  m_startCrewCount: 10
+  m_startCrewCount: 20
   m_startPlayerLifePoints: 600
   m_startEnemiesLifePoints: 100
   m_enemiesLifePointsIncrements: 40
