@@ -49,23 +49,24 @@ public class Unit : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		if (m_enemyTarget)
+		if (m_enemyTarget && !IsAtRange(m_enemyTarget.transform.position))
 		{
 			m_crewController.SetDestination(m_enemyTarget.transform.position);
 		}
 
 		if (IsInteracting())
 		{
-			Quaternion targetRotation = Quaternion.LookRotation(m_interactableTarget.transform.position - transform.position);
-			float fVal = Mathf.Min(2.0f * Time.deltaTime, 1);
-			transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fVal);
-
+			RotateTowardTarget(m_interactableTarget.transform.position);
 
 			PlayRightAnimation();
 		}
 		else if(IsAttacking())
 		{
-			m_crewController.SetDestination(transform.position);
+			//We stop in order to attack
+			m_crewController.ClearPath();
+
+			RotateTowardTarget(m_enemyTarget.transform.position);
+
 			PlayAnimation(Crew.CrewController.AnimationType.E_ATTACKING);
 		}
 		else
@@ -196,13 +197,13 @@ public class Unit : MonoBehaviour
 			m_interactableTarget.FreePlacement(gameObject);
 		}
 
-		//If the user clicked on an interactable object
-		//We attempt to reserve a placement point
 		if (clickedObject != null)
 		{
+			//If the user clicked on an interactable object
+			//We attempt to reserve a placement point
 			if (clickedObject.GetComponent<Objects.InteractableObject>() != null)
 			{
-				if (m_enemyTarget !=null)
+				if (m_enemyTarget != null)
 				{
 					PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
 					m_enemyTarget = null;
@@ -287,10 +288,15 @@ public class Unit : MonoBehaviour
 	{
 		if (m_enemyTarget != null)
 		{
-			return m_crewController.GetDistanceToDestination() <= m_crewController.GetStoppingDistance() + 1.5f;
+			return IsAtRange(m_enemyTarget.transform.position);
 		}
 
 		return false;
+	}
+
+	public bool IsAtRange(Vector3 targetPosition)
+	{
+		return Mathf.Abs((transform.position - targetPosition).magnitude) <= 3.0f;
 	}
 
 	public void OnDeath()
@@ -330,6 +336,13 @@ public class Unit : MonoBehaviour
     {
         GetComponent<AudioSource>().Stop();
     }
+
+	private void RotateTowardTarget(Vector3 target)
+	{
+		Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+		float fVal = Mathf.Min(2.0f * Time.deltaTime, 1);
+		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fVal);
+	}
 
 	private void PlayAnimation(Crew.CrewController.AnimationType animationType)
 	{

@@ -74,6 +74,14 @@ namespace Crew
             }
         }
 
+        public void ClearPath()
+        {
+            if (m_navMeshAgent.enabled)
+            {
+                m_navMeshAgent.ResetPath();
+            }
+        }
+
         public void SetDestination(Vector3 destination)
         {
             if (m_navMeshAgent.enabled)
