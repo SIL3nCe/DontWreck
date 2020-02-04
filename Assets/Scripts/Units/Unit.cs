@@ -11,33 +11,68 @@ using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
+	///==================================================================================
+	///PRIVATE STRUCTURES AND ENUMS
+	///==================================================================================
+
+	enum ETargetType
+	{
+		OBJECT,
+		CHARACTER,
+		NONE
+	}
+
+	struct STarget
+	{
+		public STarget(  ETargetType type, Objects.InteractableObject interactable
+			           , EnemyController enemy)
+		{
+			this.type = type;
+			interactableTarget = interactable;
+			enemyTarget = enemy;
+		}
+
+		public ETargetType					type;
+
+		public Objects.InteractableObject	interactableTarget;
+		public EnemyController				enemyTarget;
+	}
+
+	///==================================================================================
+	///PUBLIC VARIABLES
+	///==================================================================================
+
 	public Crew.CrewController			m_crewController;
 
 	[Header("Sounds")]
-	public AudioClip[] m_setDestinationSounds;
-	public AudioClip[] m_selectedSounds;
-    public AudioClip m_deathSound;
-    public AudioClip m_repairSound;
-    public AudioClip m_urinationSound;
+	public AudioClip[]					m_setDestinationSounds;
+	public AudioClip[]					m_selectedSounds;
+    public AudioClip					m_deathSound;
+    public AudioClip					m_repairSound;
+    public AudioClip					m_urinationSound;
 
-	//
-	// Private
-	//
+	///==================================================================================
+	///PRIVATE VARIABLES
+	///==================================================================================
+
 	private UI.UnitUI					m_ui;
 
-	private Objects.InteractableObject	m_interactableTarget;
-	private EnemyController				m_enemyTarget;
+	private STarget						m_target;
 
 	private int							m_maxHp;
 	private int							m_hp;
 	private bool						m_isSelected;
 	private bool						m_animStopped;
 
-	private void Start()
+	///==================================================================================
+	///ENGINE METHODS
+	///==================================================================================
+
+	private void Awake()
 	{
 		m_ui = transform.Find("UnitUI").GetComponent<UI.UnitUI>();
 
-		m_interactableTarget = null;
+		m_target = new STarget(ETargetType.NONE, null, null);
 
 		m_maxHp = 100;
 
@@ -47,16 +82,20 @@ public class Unit : MonoBehaviour
 		m_animStopped = true;
 	}
 
+	private void Start()
+	{
+	}
+
 	private void LateUpdate()
 	{
-		if (m_enemyTarget && !IsAtRange(m_enemyTarget.transform.position))
+		if (m_target.type == ETargetType.CHARACTER && m_target.enemyTarget && !IsAtRange(m_target.enemyTarget.transform.position))
 		{
-			m_crewController.SetDestination(m_enemyTarget.transform.position);
+			m_crewController.SetDestination(m_target.enemyTarget.transform.position);
 		}
 
 		if (IsInteracting())
 		{
-			RotateTowardTarget(m_interactableTarget.transform.position);
+			RotateTowardTarget(m_target.interactableTarget.transform.position);
 
 			PlayRightAnimation();
 		}
@@ -65,7 +104,7 @@ public class Unit : MonoBehaviour
 			//We stop in order to attack
 			m_crewController.ClearPath();
 
-			RotateTowardTarget(m_enemyTarget.transform.position);
+			RotateTowardTarget(m_target.enemyTarget.transform.position);
 
 			PlayAnimation(Crew.CrewController.AnimationType.E_ATTACKING);
 		}
@@ -74,6 +113,11 @@ public class Unit : MonoBehaviour
 			PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
 		}
 	}
+
+
+	///==================================================================================
+	///PUBLIC METHODS
+	///==================================================================================
 
 	/// <summary>
 	/// Set the selected status of this unit
@@ -159,12 +203,11 @@ public class Unit : MonoBehaviour
 
     public void Attack()
     {
-		if (!m_animStopped)
+		if (!m_animStopped && m_target.type == ETargetType.CHARACTER)
 		{
-			if(m_enemyTarget.TakeDamage(10) <= 0)
+			if(m_target.enemyTarget.TakeDamage(10) <= 0 || !m_target.enemyTarget)
 			{
-				m_enemyTarget = null;
-				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+				ClearTarget();
 				m_crewController.SetDestination(m_crewController.transform.position);
 			}
 		}
@@ -182,20 +225,16 @@ public class Unit : MonoBehaviour
 
     public void Interact()
     {
-		if (!m_animStopped)
+		if (!m_animStopped && m_target.type == ETargetType.OBJECT)
 		{
-			m_interactableTarget?.Interact(gameObject);
+			m_target.interactableTarget.Interact(gameObject);
 		}
     }
 
     public void SetObjective(Vector3 destination, GameObject clickedObject)
 	{
-		//If an interactable target is already set
-		//we inform it that we let our placement position
-		if (m_interactableTarget != null)
-		{
-			m_interactableTarget.FreePlacement(gameObject);
-		}
+		//We clear the current target before set a new one
+		ClearTarget();
 
 		if (clickedObject != null)
 		{
@@ -203,38 +242,21 @@ public class Unit : MonoBehaviour
 			//We attempt to reserve a placement point
 			if (clickedObject.GetComponent<Objects.InteractableObject>() != null)
 			{
-				if (m_enemyTarget != null)
-				{
-					PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
-					m_enemyTarget = null;
-				}
-
-				//
-				// Store the interactable
-				Objects.InteractableObject oldTarget = m_interactableTarget;
-				m_interactableTarget = clickedObject.GetComponent<Objects.InteractableObject>();
-
-				if (oldTarget != m_interactableTarget)
-				{
-					PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
-				}
+				// Set the new target to the interactable object
+				SetTarget(clickedObject.GetComponent<Objects.InteractableObject>());
 
 				//If we fail to reserve we stay at our current position
-				if (!m_interactableTarget.GetPlacementPoint(gameObject, out destination))
+				if (!m_target.interactableTarget.GetPlacementPoint(gameObject, out destination))
 				{
-					m_interactableTarget = null;
+					ClearTarget();
 					destination = m_crewController.transform.position;
 				}
 			}
 			else
 			{
-				m_interactableTarget = null;
-				m_enemyTarget = null;
-				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
-
 				if (clickedObject.GetComponent<EnemyController>())
 				{
-					m_enemyTarget = clickedObject.GetComponent<EnemyController>();
+					SetTarget(clickedObject.GetComponent<EnemyController>());
 				}
 			}
 		}
@@ -251,20 +273,26 @@ public class Unit : MonoBehaviour
 
 	public void OnTargetHpChanged(int newHP)
 	{
-		if (m_interactableTarget.GetComponent<Objects.InteractableBoatObject>())
+		if (m_target.type != ETargetType.OBJECT)
 		{
-			if (newHP == m_interactableTarget.m_hpMax)
+			return;
+		}
+
+		Objects.InteractableObject target = m_target.interactableTarget;
+
+		if (target.GetComponent<Objects.InteractableBoatObject>())
+		{
+			if (newHP == target.m_hpMax)
 			{
-				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+				ClearTarget();
 			}
 		}
 
 		if (newHP == 0)
 		{
-			if (m_interactableTarget.GetComponent<Objects.InteractableFire>())
+			if (target.GetComponent<Objects.InteractableFire>())
 			{
-				m_crewController.SetAnimation(Crew.CrewController.AnimationType.E_NONE);
-				m_interactableTarget = null;
+				ClearTarget();
 			}
 		}
 	}
@@ -276,7 +304,7 @@ public class Unit : MonoBehaviour
 
 	public bool IsInteracting()
 	{
-		if (m_interactableTarget != null)
+		if (m_target.type == ETargetType.OBJECT)
 		{
 			return m_crewController.GetDistanceToDestination() <= m_crewController.GetStoppingDistance();
 		}
@@ -286,9 +314,9 @@ public class Unit : MonoBehaviour
 
 	public bool IsAttacking()
 	{
-		if (m_enemyTarget != null)
+		if (m_target.type == ETargetType.CHARACTER && m_target.enemyTarget)
 		{
-			return IsAtRange(m_enemyTarget.transform.position);
+			return IsAtRange(m_target.enemyTarget.transform.position);
 		}
 
 		return false;
@@ -301,9 +329,9 @@ public class Unit : MonoBehaviour
 
 	public void OnDeath()
 	{
-		if (m_interactableTarget != null)
+		if (m_target.type == ETargetType.OBJECT)
 		{
-			m_interactableTarget.FreePlacement(gameObject);
+			m_target.interactableTarget.FreePlacement(gameObject);
 		}
 	}
 
@@ -337,11 +365,45 @@ public class Unit : MonoBehaviour
         GetComponent<AudioSource>().Stop();
     }
 
+	///==================================================================================
+	///PRIVATE METHODS
+	///==================================================================================
+
 	private void RotateTowardTarget(Vector3 target)
 	{
 		Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
 		float fVal = Mathf.Min(2.0f * Time.deltaTime, 1);
 		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, fVal);
+	}
+
+	private void ClearTarget()
+	{
+		if (m_target.type == ETargetType.OBJECT)
+		{
+			m_target.interactableTarget.FreePlacement(gameObject);
+		}
+
+		m_target.type = ETargetType.NONE;
+		m_target.interactableTarget = null;
+		m_target.enemyTarget = null;
+
+		PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+	}
+
+	private void SetTarget(EnemyController enemy)
+	{
+		ClearTarget();
+
+		m_target.type = ETargetType.CHARACTER;
+		m_target.enemyTarget = enemy;
+	}
+
+	private void SetTarget(Objects.InteractableObject interactable)
+	{
+		ClearTarget();
+
+		m_target.type = ETargetType.OBJECT;
+		m_target.interactableTarget = interactable;
 	}
 
 	private void PlayAnimation(Crew.CrewController.AnimationType animationType)
@@ -360,35 +422,40 @@ public class Unit : MonoBehaviour
 
 	private void PlayRightAnimation()
 	{
-		if (m_interactableTarget.GetComponent<Objects.InteractableCannon>())
+		if (m_target.type == ETargetType.OBJECT)
 		{
-			if (m_interactableTarget.m_hp != m_interactableTarget.m_hpMax)
+			Objects.InteractableObject target = m_target.interactableTarget;
+
+			if (target.GetComponent<Objects.InteractableCannon>())
 			{
-				PlayAnimation(Crew.CrewController.AnimationType.E_REPAIRING);
+				if (target.m_hp != target.m_hpMax)
+				{
+					PlayAnimation(Crew.CrewController.AnimationType.E_REPAIRING);
+				}
+				else
+				{
+					PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
+				}
 			}
-			else
+			else if (target.GetComponent<Objects.InteractableBoatObject>())
+			{
+				if (target.m_hp != target.m_hpMax)
+				{
+					PlayAnimation(Crew.CrewController.AnimationType.E_REPAIRING);
+				}
+				else
+				{
+					PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
+				}
+			}
+			else if (target.GetComponent<Objects.InteractableFire>())
+			{
+				PlayAnimation(Crew.CrewController.AnimationType.E_PIPIYING);
+			}
+			else if (target.GetComponent<Objects.InteractableResource>())
 			{
 				PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
 			}
-		}
-		else if (m_interactableTarget.GetComponent<Objects.InteractableBoatObject>())
-		{
-			if (m_interactableTarget.m_hp != m_interactableTarget.m_hpMax)
-			{
-				PlayAnimation(Crew.CrewController.AnimationType.E_REPAIRING);
-			}
-			else
-			{
-				PlayAnimation(Crew.CrewController.AnimationType.E_NONE);
-			}
-		}
-		else if (m_interactableTarget.GetComponent<Objects.InteractableFire>())
-		{
-			PlayAnimation(Crew.CrewController.AnimationType.E_PIPIYING);
-		}
-		else if (m_interactableTarget.GetComponent<Objects.InteractableResource>())
-		{
-			PlayAnimation(Crew.CrewController.AnimationType.E_INTERACTING);
 		}
 	}
 }
