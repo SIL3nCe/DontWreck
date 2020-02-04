@@ -26,7 +26,6 @@ public class UnitSelector : MonoBehaviour
 	//
 	private bool m_isSelecting;		//< Indicates if the user is currently selecting 
 	private Vector2 m_mouseStartPosition;   //< The current selection start position for the current selection
-	private bool m_canMoveUnit = false;
 
 	private List<Unit> m_selectedUnits = new List<Unit>();
 

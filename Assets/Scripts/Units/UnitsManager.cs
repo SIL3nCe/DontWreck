@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class UnitsManager : MonoBehaviour
 {
@@ -20,14 +22,28 @@ public class UnitsManager : MonoBehaviour
 	[Header("Unit")]
 	public GameObject m_unitPrefab;
 	public AudioClip m_unitSpawnAudioClip;
+	
+	[Header("FPS view")]
+	public InputAction m_FPSView;
+	private Unit m_FPSUnit;
 
 	//
 	//
 	private List<Unit> m_units = new List<Unit>();
+	void OnEnable()
+	{
+		m_FPSView.Enable();
+	}
 
-	// Start is called before the first frame update
+	void OnDisable()
+	{
+		m_FPSView.Disable();
+	}
+
 	void Start()
     {
+		m_FPSUnit = null;
+
 		//
 		// Ensure spwan point and spawn start destination are not null
 		Assert.AreNotEqual(m_spawnPoint, null);
@@ -36,6 +52,29 @@ public class UnitsManager : MonoBehaviour
 		//
 		// 
 		GameManager.m_instance.m_worldClickDestinationSetter.AddOnClickedCallback(OnClicked);
+	}
+
+	void Update()
+	{
+		if (m_FPSView.triggered)
+		{
+			if (m_FPSUnit)
+			{
+				CinemachineVirtualCamera vCam = m_FPSUnit.GetComponentInChildren<CinemachineVirtualCamera>();
+				vCam.m_Priority = 9;
+				m_FPSUnit = null;
+			}
+			else
+			{
+				List<Unit> selectedUnits = GameManager.m_instance.m_unitSelector.GetSelectedUnits();
+				if (selectedUnits.Count != 0)
+				{
+					m_FPSUnit = selectedUnits[0];
+					CinemachineVirtualCamera vCam = m_FPSUnit.GetComponentInChildren<CinemachineVirtualCamera>();
+					vCam.m_Priority = 11;
+				}
+			}
+		}
 	}
 
 	/// <summary>
