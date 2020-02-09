@@ -37,10 +37,25 @@ public class ResourcesManager : MonoBehaviour
 
 	public void Start()
 	{
-		//if (ES3.KeyExists("playerWoodCount"))
-		//{
-		//	m_startWoodCount = ES3.Load<int>("playerWoodCount");
-		//}
+		if (ES3.KeyExists("playerWoodCount"))
+		{
+			m_startWoodCount = ES3.Load<int>("playerWoodCount");
+		}
+
+		if (ES3.KeyExists("playerCoalCount"))
+		{
+			m_startCoalCount = ES3.Load<int>("playerCoalCount");
+		}
+
+		if (ES3.KeyExists("playerJambonBoursinCount"))
+		{
+			m_startJambonBoursinCount = ES3.Load<int>("playerJambonBoursinCount");
+		}
+
+		if (ES3.KeyExists("playerCrewCount"))
+		{
+			m_startCrewCount = ES3.Load<int>("playerCrewCount");
+		}
 
 		//
 		// We ensurr the in game HUD GUI manager is not null
@@ -74,9 +89,10 @@ public class ResourcesManager : MonoBehaviour
 
 	public void OnDisable()
 	{
-		//
-		//
-		//ES3.Save<int>("playerWoodCount", m_currentWoodCount);
+		ES3.Save<int>("playerWoodCount", m_currentWoodCount);
+		ES3.Save<int>("playerCoalCount", m_currentCoalCount);
+		ES3.Save<int>("playerJambonBoursinCount", m_currentJambonBoursinCount);
+		ES3.Save<int>("playerCrewCount", m_currentCrewCount);
 	}
 
 	public void SpawnStartUnits()
