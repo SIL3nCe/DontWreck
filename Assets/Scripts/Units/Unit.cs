@@ -290,7 +290,7 @@ public class Unit : MonoBehaviour
 
 		if (newHP == 0)
 		{
-			if (target.GetComponent<Objects.InteractableFire>())
+			if (target.GetComponent<Objects.InteractableFire>() || target.GetComponent<Objects.InteractableResource>())
 			{
 				ClearTarget();
 			}

@@ -55,6 +55,8 @@ public class MainMenu : MonoBehaviour
         FirstCamera.gameObject.SetActive(false);
         PlayCamera.gameObject.SetActive(true);
 
+        ES3.DeleteFile();
+
         // Lauch scene loading
         transitionScene.LoadScene(5000);
 
