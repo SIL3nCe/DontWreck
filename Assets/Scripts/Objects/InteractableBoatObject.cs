@@ -6,6 +6,9 @@ namespace Objects
 {
     public class InteractableBoatObject : Objects.InteractableObject
     {
+        [Header("Repair Cost")]
+        public int m_woodRepairCost;
+
         public new void Start()
         {
             base.Start();
@@ -30,7 +33,14 @@ namespace Objects
 
         private void CrewInteract()
         {
-            ModHp(10);
+            ResourcesManager resourcesManager = GameManager.m_instance.m_resourcesManager;
+
+            if (resourcesManager.GetWoodCount() >= m_woodRepairCost)
+            {
+                ModHp(10);
+
+                resourcesManager.AddWood(-m_woodRepairCost);
+            }
         }
 
         private void EnnemyInteract()

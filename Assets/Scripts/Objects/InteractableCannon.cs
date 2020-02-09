@@ -9,6 +9,12 @@ namespace Objects
         [Header("Cannon Loading")]
         public int  m_maxCharge;
 
+        [Header("Cannon Fire")]
+        public int  m_coalFireCost;
+
+        [Header("Cannon Repair")]
+        public int  m_woodRepairCost;
+
         [Header("Cannon objects")]
         public GameObject m_cannonFullHealth;
         public GameObject m_cannonDamaged;
@@ -48,6 +54,11 @@ namespace Objects
         public override void SetHp(int hp)
         {
 
+            if (m_hp == m_hpMax && hp > 0)
+            {
+                ResetCharge();
+            }
+
             base.SetHp(hp);
 
             if (hp < m_hpMax)
@@ -74,8 +85,7 @@ namespace Objects
         {
             if (m_hp != m_hpMax)
             {
-                ModHp(10);
-                Charge(200);
+                Repair();
             }
             else if (Charge(10))
             {
@@ -88,33 +98,59 @@ namespace Objects
             ModHp(-10);
         }
 
+        private void Repair()
+        {
+            ResourcesManager resourcesManager = GameManager.m_instance.m_resourcesManager;
+            
+            if (resourcesManager.GetWoodCount() >= m_woodRepairCost)
+            {
+                ModHp(10);
+                ResetCharge();
+
+                resourcesManager.AddWood(-m_woodRepairCost);
+            }
+        }
+
         private bool Charge(int chargeAmount)
         {
-            m_charge += chargeAmount;
+            m_charge = Mathf.Clamp(m_charge + chargeAmount, 0, m_maxCharge);
+            m_objectUI.SetProgressBar(m_charge / (float)m_maxCharge);
 
-            if (m_charge > m_maxCharge)
+            if (m_charge == m_maxCharge)
             {
-                m_objectUI.SetProgressBarDisplayed(false);
-                m_charge = 0;
                 return true;
             }
 
             m_objectUI.SetProgressBarDisplayed(true);
-            m_objectUI.SetProgressBar(m_charge / (float)m_maxCharge);
 
             return false;
         }
 
+        private void ResetCharge()
+        {
+            m_objectUI.SetProgressBarDisplayed(false);
+            m_charge = 0;
+        }
+
         private void Fire()
         {
-			if (!GetComponent<AudioSource>().isPlaying)
-			{
-				GetComponent<AudioSource>().PlayOneShot(m_audioClipsFire[Random.Range(0, m_audioClipsFire.Length)]);
-			}
+            ResourcesManager resourcesManager = GameManager.m_instance.m_resourcesManager;
 
-			m_shotPostFX.Play();
+            if (resourcesManager.GetCoalCount() >= m_coalFireCost)
+            {
+                if (!GetComponent<AudioSource>().isPlaying)
+                {
+                    GetComponent<AudioSource>().PlayOneShot(m_audioClipsFire[Random.Range(0, m_audioClipsFire.Length)]);
+                }
 
-			GameManager.m_instance.m_resourcesManager.DecreaseEnemiesLifePoints(2);
+                m_shotPostFX.Play();
+
+                GameManager.m_instance.m_resourcesManager.DecreaseEnemiesLifePoints(2);
+
+                ResetCharge();
+
+                resourcesManager.AddCoal(-m_coalFireCost);
+            }
 		}
     }
 }

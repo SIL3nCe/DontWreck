@@ -71,6 +71,8 @@ MonoBehaviour:
   m_hp: 100
   m_objectUI: {fileID: 2446910937028210117}
   m_maxCharge: 100
+  m_coalFireCost: 2
+  m_woodRepairCost: 1
   m_cannonFullHealth: {fileID: 7529777119866109943}
   m_cannonDamaged: {fileID: 3668888211635715335}
   m_shotPostFX: {fileID: 942911465180419152}

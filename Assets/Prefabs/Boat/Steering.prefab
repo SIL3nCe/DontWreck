@@ -210,6 +210,7 @@ MonoBehaviour:
   m_hpMax: 100
   m_hp: 100
   m_objectUI: {fileID: 5625698267429348816}
+  m_woodRepairCost: 1
 --- !u!1001 &8727452491449879439
 PrefabInstance:
   m_ObjectHideFlags: 0

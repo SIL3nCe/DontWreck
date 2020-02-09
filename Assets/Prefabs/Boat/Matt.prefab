@@ -308,6 +308,7 @@ MonoBehaviour:
   m_hpMax: 100
   m_hp: 100
   m_objectUI: {fileID: 3506779015016940061}
+  m_woodRepairCost: 1
 --- !u!1 &8613096327385222013
 GameObject:
   m_ObjectHideFlags: 0
